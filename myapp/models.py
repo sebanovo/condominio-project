@@ -91,7 +91,7 @@ class Multa(models.Model):
         choices=[
             ("pendiente", "Pendiente"),
             ("pagada", "Pagada"),
-            ("condonada", "Condonada"),
+            ("perdonada", "Perdonada"),
         ],
     )
     metodo_pago = models.CharField(
