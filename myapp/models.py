@@ -88,6 +88,9 @@ class Reserva(models.Model):
         ],
     )
 
+    def __str__(self):
+        return f"{self.usuario.username} - {self.area_comun.nombre} - {self.fecha}"
+
 
 class Multa(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
