@@ -17,6 +17,9 @@ class Casa(models.Model):
         validators=[MinValueValidator(1)]  # minimo 1 persona
     )
 
+    def __str__(self):
+        return f"{self.nro}"
+
 
 class Perfil(models.Model):
     telefono = models.IntegerField(unique=True)
@@ -29,6 +32,9 @@ class Perfil(models.Model):
         related_name="residentes",
     )
     avatar = models.ImageField(upload_to="avatars/", blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.casa.nro if self.casa else 'Sin casa'}"
 
 
 class Vehiculo(models.Model):
@@ -43,24 +49,26 @@ class Vehiculo(models.Model):
         ],
     )
     color = models.CharField(max_length=50)
-    id_usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.placa} - {self.tipo} - {self.color}"
 
 
 class AreaComun(models.Model):
     nombre = models.CharField(max_length=100)
     descripcion = models.TextField()
-    horario = models.CharField(max_length=100)
+    horario_apertura = models.TimeField(default="08:00:00")
+    horario_cierre = models.TimeField(default="22:00:00")
     costo = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"{self.nombre} - {self.horario_apertura}/{self.horario_cierre} - {self.costo}bs/hora"
 
 
 class Reserva(models.Model):
-    ESTADO_PAGO_CHOICES = [
-        ("Pendiente"),
-        ("Pagado"),
-        ("Cancelado"),
-    ]
-    id_usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    id_area = models.ForeignKey(AreaComun, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    area_comun = models.ForeignKey(AreaComun, on_delete=models.CASCADE)
     fecha = models.DateTimeField()
     estado_pago = models.CharField(
         max_length=20,
@@ -82,7 +90,7 @@ class Reserva(models.Model):
 
 
 class Multa(models.Model):
-    id_usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     descripcion = models.TextField()
     monto = models.DecimalField(max_digits=10, decimal_places=2)
     fecha = models.DateField()
@@ -103,10 +111,22 @@ class Multa(models.Model):
         ],
     )
 
+    def __str__(self):
+        return f"{self.usuario.username} - {self.monto} - {self.estado_pago}"
+
+
+class Extranjero(models.Model):
+    ci = models.CharField(max_length=20, unique=True)
+    nombre = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.ci} - {self.nombre}"
+
 
 class IngresoSalida(models.Model):
-    id_usuario = models.ForeignKey(
-        User, on_delete=models.CASCADE, null=True, blank=True
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    extranjero = models.ForeignKey(
+        Extranjero, on_delete=models.CASCADE, null=True, blank=True
     )
     fecha = models.DateTimeField()
     tipo = models.CharField(
@@ -128,7 +148,5 @@ class IngresoSalida(models.Model):
     )
     es_extranjero = models.BooleanField(default=False)
 
-
-class Extranjero(models.Model):
-    ci = models.CharField(max_length=20, unique=True)
-    nombre = models.CharField(max_length=100)
+    def __str__(self):
+        return f"{self.usuario.username if not self.es_extranjero else self.extranjero.nombre} - {self.fecha} - {self.tipo} - {self.modo} - {'es extranjero' if self.es_extranjero else 'no es extranjero'}"
