@@ -1,5 +1,9 @@
 # 🏠 Sistema de Gestión de Condominios - Django API
 
+<div align="center">
+    <img width="791" height="565" alt="image" src="https://github.com/user-attachments/assets/6eec5181-0566-4e18-b5a5-7fd65889b53d" />
+</div>
+
 ## 📦 Requisitos Previos
 - Python 3.8+
 - pip (gestor de paquetes de Python)
