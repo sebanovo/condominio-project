@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 
+# Tablas para la base de datos de condominio
+
 
 class Casa(models.Model):
     nro = models.CharField(max_length=10, unique=True)
