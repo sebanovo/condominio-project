@@ -1,182 +1,104 @@
-# 🏠 Sistema de Gestión de Condominios - Django API
 
-<div align="center">
-    <img width="791" height="565" alt="image" src="https://github.com/user-attachments/assets/6eec5181-0566-4e18-b5a5-7fd65889b53d" />
+<div align="center" width="100">
+	<h1>:school: :calendar: :books:PROYECTO FINAL SI2  :books: :calendar: :school:</h1>
 </div>
 
-## 📦 Requisitos Previos
-- Python 3.8+
-- pip (gestor de paquetes de Python)
-- Git
+<p align="center">
+	Sistema de Gestion Academica para Colegios tipo SAAS
+</p>
 
-## 🚀 Instalación y Ejecución
+<!--
+<h3 align="center">
+  <b>Repositorio para almacenar todos los proyectos del semestre.</b>
+</h3>
+-->
 
-### 1. Clonar el repositorio
-```bash
-git clone <url-github>
-cd folder
+<pre>
+We're a group of passionate students. While preparing for exams, we're also diving into the world
+of programming and learning from each other along the way.
+</pre>
+
+<p align="center">
+  <a href="https://github.com/DenverCoder1/readme-typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=Time+New+Roman&color=cyan&size=25&center=true&vCenter=true&width=600&height=100&lines=Actualiza+tu+rama+en+todo+momento;Revisa+tu+codigo+antes+de+commitear;El+codigo+limpio+es+buen+camino..&hearts;"></a>
+</p>
+
+:rocket: Para iniciar:<br/>
+:green_circle: :one: CLONAR REPOSITORIO COMPLETO / RAMA<br/>
+```python
+git clone url-repositorio
 ```
 
-### 2. Crear entorno virtual (recomendado)
-```bash
-# Linux/Mac
-python -m venv venv
-source venv/bin/activate
 
-# Windows
-python -m venv venv
-venv\Scripts\activate
+```python
+git clone --single-branch --branch rama-especifica url-repositorio
+```
+:green_circle: :two: CREARSE UN RAMA<br/>
+
+```python
+git checkout -b nombre-de-mi-rama
 ```
 
-### 3. Instalar dependencias
-```bash
-pip install -r requirements.txt
+```python
+git push origin nombre-de-mi-rama
+```
+:green_circle: :three: DOCKER<br/>
+```python
+docker compose up --build
 ```
 
-### 4. Configurar variables de entorno
-```bash
-# Copiar archivo de ejemplo
-cp .env.example .env
+<hr>
 
-# Editar el archivo .env con tus configuraciones
-# DEBUG=True
-# SECRET_KEY=tu-clave-secreta-aqui
-# DATABASE_URL=sqlite:///db.sqlite3
-```
-
-### 5. Configurar base de datos
-```bash
-# Crear migraciones
-python manage.py makemigrations
-
-# Aplicar migraciones
-python manage.py migrate
-
-# Crear superusuario (admin)
-python manage.py createsuperuser
-# Sigue las instrucciones para crear usuario admin
-```
-
-### 6. Ejecutar servidor de desarrollo
-```bash
-python manage.py runserver
-```
-
-### 7. Acceder al sistema
-- API: http://localhost:8000/api/
-- Admin: http://localhost:8000/admin/
-- Documentación API: http://localhost:8000/api/docs/
-
-## 📋 Endpoints principales de la API
-
-### Autenticación
-- `POST /api/auth/login/` - Iniciar sesión
-- `POST /api/auth/logout/` - Cerrar sesión
-
-### Usuarios
-- `GET /api/users/` - Listar usuarios
-- `POST /api/users/` - Crear usuario
-- `GET /api/users/{id}/` - Obtener usuario específico
-- `PUT /api/users/{id}/` - Actualizar usuario
-- `DELETE /api/users/{id}/` - Eliminar usuario
-- `POST /api/users/{id}/upload_avatar/` - Subir avatar
-
-### Casas
-- `GET /api/casas/` - Listar casas
-- `POST /api/casas/` - Crear casa
-- `GET /api/casas/{id}/residentes/` - Residentes de una casa
-
-### Reservas
-- `GET /api/reservas/` - Listar reservas
-- `POST /api/reservas/` - Crear reserva
-
-## ⚙️ Configuración de variables de entorno
-
-Archivo `.env`:
-```env
-DEBUG=True
-SECRET_KEY=tu-clave-secreta-unica-y-segura
-DATABASE_URL=sqlite:///db.sqlite3
-ALLOWED_HOSTS=localhost,127.0.0.1
-TIME_ZONE=America/Lima
-LANGUAGE_CODE=es-pe
-```
-
-## 🗃️ Estructura del proyecto
-```
-mi-condominio/
-├── .env.example          # Variables de entorno de ejemplo
-├── requirements.txt      # Dependencias de Python
-├── manage.py            # Script de gestión de Django
-├── myproject/           # Configuración del proyecto
-│   ├── settings.py      # Configuración principal
-│   ├── urls.py          # URLs principales
-│   └── wsgi.py          # WSGI configuration
-└── myapp/               # Aplicación principal
-    ├── models.py        # Modelos de base de datos
-    ├── serializers.py   # Serializers para la API
-    ├── views.py         # Vistas y endpoints
-    ├── urls.py          # URLs de la app
-    └── admin.py         # Configuración del admin
-```
-
-## 🔧 Comandos útiles
-
-```bash
-# Crear migraciones después de cambios en modelos
-python manage.py makemigrations
-
-# Aplicar migraciones
-python manage.py migrate
-
-# Crear superusuario
-python manage.py createsuperuser
-
-# Ejecutar tests
-python manage.py test
-
-# Shell interactivo de Django
-python manage.py shell
-
-# Verificar estado de migraciones
-python manage.py showmigrations
-```
-
-## 📊 Modelos principales
-- **User** - Usuarios del sistema (extendido de Django)
-- **Perfil** - Información adicional de usuarios
-- **Casa** - Unidades habitacionales del condominio
-- **Vehiculo** - Vehículos de residentes
-- **AreaComun** - Áreas comunes disponibles
-- **Reserva** - Reservas de áreas comunes
-- **Multa** - Sistema de multas
-- **IngresoSalida** - Control de acceso
-
-## 🛡️ Permisos y autenticación
-- Autenticación por tokens (DRF Token)
-- Permisos basados en roles
-- Grupos: Administradores, Residentes, Guardias
-
-## 🤝 Contribución
-1. Fork el proyecto
-2. Crear feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add AmazingFeature'`)
-4. Push al branch (`git push origin feature/AmazingFeature`)
-5. Abrir Pull Request
-
-## 📝 Licencia
-Este proyecto está bajo la Licencia MIT. Ver `LICENSE` para más detalles.
-
-## 🆘 Soporte
-- Documentación Django: https://docs.djangoproject.com/
-- Documentación DRF: https://www.django-rest-framework.org/
-- Issues: https://github.com/tuusuario/mi-condominio/issues
-
-## 🚀 Despliegue en producción
-
-Para producción, configurar:
-- DEBUG=False
-- Base de datos PostgreSQL
-- Servidor WSGI (Gunicorn)
-- Servidor web (Nginx)
-- Servicio de almacenamiento (AWS S3 para archivos media)
+<div align="center" width="100">
+  <h1>Stack</h1>
+  <!-- Languages -->
+  </br>
+  <h3>Languages and Frameworks</h3>
+	<img
+  		src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
+  		width="60px"
+  		alt="Python">
+	<img
+	  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/django/django-plain.svg"
+	  width="60px"
+	  alt="Django">
+	<img
+	  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg"
+	  width="60px"
+	  alt="React">
+  <img
+    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original-wordmark.svg"
+    width="60px"
+    alt="HTML5">
+    &nbsp;&nbsp;&nbsp;&nbsp;
+  <img
+    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original-wordmark.svg"
+    width="60px"
+    alt="css3">
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <!-- Frameworks -->
+	
+  </br>
+    <!-- tools -->
+  </br>
+  <h3>Tools</h3>
+  <img
+    src="https://cdn.simpleicons.org/github/FFFFFF"
+    width="50px"
+    alt="GitHub Logo White">
+  <img
+    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original-wordmark.svg"
+    width="60px"
+    alt="Docker">
+    &nbsp;&nbsp;&nbsp;&nbsp;
+  <img
+    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original-wordmark.svg"
+    width="65px"
+    alt="Git Wordmark">
+  <img
+    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original-wordmark.svg"
+    width="60px"
+    alt="VS Code">
+    &nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+<hr>
+Last modified: 15/09/2025
