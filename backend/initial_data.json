@@ -1128,7 +1128,7 @@
       "date_joined": "2025-09-21T15:44:25Z",
       "username": "messi",
       "email": "messi@gmail.com",
-      "password": "password",
+      "password": "pbkdf2_sha256$870000$TiJRx3uYEQVHL5NEYk0hl0$BmsrH24iVBFTEPHdv7+U2XgsI8F0EyhOX/5/WZr6cZ0=",
       "photo": "",
       "groups": [3],
       "user_permissions": []
@@ -1147,7 +1147,7 @@
       "date_joined": "2025-09-21T15:45:11Z",
       "username": "cr7",
       "email": "cr7@gmail.com",
-      "password": "password",
+      "password": "pbkdf2_sha256$870000$TiJRx3uYEQVHL5NEYk0hl0$BmsrH24iVBFTEPHdv7+U2XgsI8F0EyhOX/5/WZr6cZ0=",
       "photo": "",
       "groups": [3],
       "user_permissions": []
@@ -1166,7 +1166,7 @@
       "date_joined": "2025-09-21T15:45:48Z",
       "username": "lucas",
       "email": "lucas@gmail.com",
-      "password": "password",
+      "password": "pbkdf2_sha256$870000$TiJRx3uYEQVHL5NEYk0hl0$BmsrH24iVBFTEPHdv7+U2XgsI8F0EyhOX/5/WZr6cZ0=",
       "photo": "",
       "groups": [2],
       "user_permissions": []
@@ -1185,7 +1185,7 @@
       "date_joined": "2025-09-21T15:46:15Z",
       "username": "brayan",
       "email": "braya@gmail.com",
-      "password": "password",
+      "password": "pbkdf2_sha256$870000$TiJRx3uYEQVHL5NEYk0hl0$BmsrH24iVBFTEPHdv7+U2XgsI8F0EyhOX/5/WZr6cZ0=",
       "photo": "",
       "groups": [2],
       "user_permissions": []
