@@ -46,12 +46,12 @@ INSTALLED_APPS = [
     "rest_framework",
     "drf_spectacular",
     # proyectos
-    "accounts",
+    "condominio",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware", # para archivos estaticos en produccion
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # para archivos estaticos en produccion
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -79,7 +79,7 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = "accounts.User"
+AUTH_USER_MODEL = "condominio.Usuario"
 
 TEMPLATES = [
     {
@@ -98,7 +98,7 @@ TEMPLATES = [
 ]
 
 REST_FRAMEWORK = {
-    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
@@ -107,6 +107,14 @@ REST_FRAMEWORK = {
 SPECTACULAR_SETTINGS = {
     "TITLE": "SGAC SaaS API",
     "VERSION": "0.1",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "CONDOMINIO API",
+    "DESCRIPTION": "API para la gestión de condominios",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    # OTHER SETTINGS
 }
 
 
