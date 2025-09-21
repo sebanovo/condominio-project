@@ -8,10 +8,9 @@ from .views import (
     # admin y/o personal
     CasaView,
     AsignarCasaView,
-    AsignarMultaView,
+    MultaView,
     IngresoSalidaView,
     VehiculoView,
-    AsignarVehiculoView,
     ReservaView,
     AreaComunView,
     ExtranjeroView,
@@ -33,12 +32,9 @@ urlpatterns = [
     # admin y/o personal
     path("v1/casa/", CasaView.as_view(), name="casa"),
     path("v1/asignar-casa/", AsignarCasaView.as_view(), name="asignar-casa"),
-    path("v1/asignar-multa/", AsignarMultaView.as_view(), name="asignar-multa"),
+    path("v1/multa/", MultaView.as_view(), name="multa"),
     path("v1/ingreso-salida/", IngresoSalidaView.as_view(), name="ingreso-salida"),
     path("v1/vehiculo/", VehiculoView.as_view(), name="vehiculo"),
-    path(
-        "v1/asignar-vehiculo/", AsignarVehiculoView.as_view(), name="asignar-vehiculo"
-    ),
     path("v1/reserva/", ReservaView.as_view(), name="reserva"),
     path("v1/area-comun/", AreaComunView.as_view(), name="area-comun"),
     path("v1/extranjero/", ExtranjeroView.as_view(), name="extranjero"),

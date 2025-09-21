@@ -119,20 +119,32 @@ class UserView(APIView):
 
 
 class CasaView(APIView):
-    def get(self, request):
+    def post(self, request):
+        """Crear casa (solo admin y personal, puede hacerlo)"""
         token = request.COOKIES.get("jwt")
 
         if not token:
             raise AuthenticationFailed("Unauthenticated!")
-
         try:
             payload = jwt.decode(token, "secret", algorithms=["HS256"])
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed("Unauthenticated!")
-
         user = Usuario.objects.filter(id=payload["id"]).first()
-        serializer = UsuarioSerializer(user)
-        return Response(serializer.data)
+        roles = user.groups.all()
+
+        if (
+            not roles.filter(name="Administrador").exists()
+            and not roles.filter(name="Personal").exists()
+        ):
+            raise AuthenticationFailed("You are not admin or personal")
+
+        new_casa = Casa.objects.create(
+            nro=request.data["nro"],
+            categoria=request.data["categoria"],
+            capacidad=request.data["capacidad"],
+        )
+        new_casa.save()
+        return Response({"message": "casa created successfully"})
 
 
 class AsignarCasaView(APIView):
@@ -147,7 +159,7 @@ class AsignarCasaView(APIView):
             raise AuthenticationFailed("Unauthenticated!")
         user = Usuario.objects.filter(id=payload["id"]).first()
 
-        if not user.groups.all().filter(name="Admin").exists():
+        if not user.groups.all().filter(name="Administrador").exists():
             raise AuthenticationFailed("You are not admin")
 
         # asignar casa a usuario no crear la casa
@@ -159,10 +171,11 @@ class AsignarCasaView(APIView):
         return Response({"message": "casa assigned to user successfully"})
 
 
-class AsignarMultaView(APIView):
+class MultaView(APIView):
     def post(self, request):
-        """Asignar multa a usuario (solo admin, puede hacerlo)"""
+        """Crear multa (solo admin y personal, puede hacerlo)"""
         token = request.COOKIES.get("jwt")
+
         if not token:
             raise AuthenticationFailed("Unauthenticated!")
         try:
@@ -170,16 +183,22 @@ class AsignarMultaView(APIView):
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed("Unauthenticated!")
         user = Usuario.objects.filter(id=payload["id"]).first()
+        roles = user.groups.all()
 
-        if not user.groups.all().filter(name="Admin").exists():
-            raise AuthenticationFailed("You are not admin")
-
-        user_id = request.data["user_id"]
-        multa_id = request.data["multa_id"]
-        multa = Multa.objects.filter(id=multa_id).first()
-        multa.usuarios.add(user_id)
-        multa.save()
-        return Response({"message": "multa assigned to user successfully"})
+        if (
+            not roles.filter(name="Administrador").exists()
+            and not roles.filter(name="Personal").exists()
+        ):
+            raise AuthenticationFailed("You are not admin or personal")
+        new_multa = Multa.objects.create(
+            descripcion=request.data["descripcion"],
+            monto=request.data["monto"],
+            fecha=request.data["fecha"],
+            estado_pago=request.data["estado_pago"],
+            id_usuario=Usuario.objects.filter(id=request.data["id_usuario"]).first(),
+        )
+        new_multa.save()
+        return Response({"message": "multa created successfully"})
 
 
 class IngresoSalidaView(APIView):
@@ -196,8 +215,8 @@ class IngresoSalidaView(APIView):
 
         roles = user.groups.all()
         if (
-            not roles.filter(name="Admin").exists()
-            or not roles.filter(name="Personal").exists()
+            not roles.filter(name="Administrador").exists()
+            and not roles.filter(name="Personal").exists()
         ):
             raise AuthenticationFailed("You are not admin or personal")
 
@@ -212,10 +231,13 @@ class IngresoSalidaView(APIView):
         )
 
         if request.data["es_extranjero"]:
-            new_ingreso_salida.extranjero_id = persona_id
+            new_ingreso_salida.extranjero_id = Extranjero.objects.filter(
+                id=persona_id
+            ).first()
         else:
-            new_ingreso_salida.id_usuario_id = persona_id
-
+            new_ingreso_salida.id_usuario_id = Usuario.objects.filter(
+                id=persona_id
+            ).first()
         new_ingreso_salida.save()
         return Response({"message": "ingreso/salida assigned to persona successfully"})
 
@@ -235,8 +257,8 @@ class VehiculoView(APIView):
 
         roles = Usuario.objects.filter(id=payload["id"]).first().groups.all()
         if (
-            not roles.filter(name="Admin").exists()
-            or not roles.filter(name="Personal").exists()
+            not roles.filter(name="Administrador").exists()
+            and not roles.filter(name="Personal").exists()
         ):
             raise AuthenticationFailed("You are not admin or personal")
 
@@ -244,35 +266,10 @@ class VehiculoView(APIView):
             placa=request.data["placa"],
             tipo=request.data["tipo"],
             color=request.data["color"],
+            id_usuario=Usuario.objects.filter(id=request.data["id_usuario"]).first(),
         )
-        new_vehiculo.id_usuario = request.data["id_usuario"]
         new_vehiculo.save()
         return Response({"message": "vehiculo created successfully"})
-
-
-class AsignarVehiculoView(APIView):
-    def post(self, request):
-        """Asignar vehiculo a usuario (solo admin, puede hacerlo)"""
-        token = request.COOKIES.get("jwt")
-        if not token:
-            raise AuthenticationFailed("Unauthenticated!")
-        try:
-            payload = jwt.decode(token, "secret", algorithms=["HS256"])
-        except jwt.ExpiredSignatureError:
-            raise AuthenticationFailed("Unauthenticated!")
-        user = Usuario.objects.filter(id=payload["id"]).first()
-
-        if not user.groups.all().filter(name="Admin").exists():
-            raise AuthenticationFailed("You are not admin")
-
-        user_id = request.data["user_id"]
-        vehiculo_id = request.data["vehiculo_id"]
-
-        vehiculo = Vehiculo.objects.filter(id=vehiculo_id).first()
-        # asignar el vehiculo al usuario
-        vehiculo.id_usuario = user_id
-        vehiculo.save()
-        return Response({"message": "vehiculo assigned to user successfully"})
 
 
 class ReservaView(APIView):
@@ -289,21 +286,20 @@ class ReservaView(APIView):
 
         roles = user.groups.all()
         if (
-            not roles.filter(name="Admin").exists()
-            or roles.filter(name="Personal").exists()
+            not roles.filter(name="Administrador").exists()
+            and roles.filter(name="Personal").exists()
         ):
             raise AuthenticationFailed("You are not admin or personal")
 
-        user_id = request.data["user_id"]
-        reserva_id = request.data["reserva_id"]
+        user_id = request.data["id_usuario"]
+        reserva_id = request.data["id_area"]
         new_reserva = Reserva.objects.create(
-            id_area_comun=request.data["id_area_comun"],
             fecha=request.data["fecha"],
             estado_pago=request.data["estado_pago"],
             metodo_pago=request.data["metodo_pago"],
+            id_area=AreaComun.objects.filter(id=reserva_id).first(),
+            id_usuario=Usuario.objects.filter(id=user_id).first(),
         )
-        new_reserva.id_area = reserva_id
-        new_reserva.id_usuario = user_id
         new_reserva.save()
         return Response({"message": "reserva assigned to user successfully"})
 
@@ -322,8 +318,8 @@ class AreaComunView(APIView):
 
         roles = user.groups.all()
         if (
-            not roles.filter(name="Admin").exists()
-            or not roles.filter(name="Personal").exists()
+            not roles.filter(name="Administrador").exists()
+            and not roles.filter(name="Personal").exists()
         ):
             raise AuthenticationFailed("You are not admin or personal")
 
@@ -352,8 +348,8 @@ class ExtranjeroView(APIView):
 
         roles = Usuario.objects.filter(id=payload["id"]).first().groups.all()
         if (
-            not roles.filter(name="Admin").exists()
-            or not roles.filter(name="Personal").exists()
+            not roles.filter(name="Administrador").exists()
+            and not roles.filter(name="Personal").exists()
         ):
             raise AuthenticationFailed("You are not admin or personal")
 
@@ -366,9 +362,9 @@ class ExtranjeroView(APIView):
 
 
 """
-#############################################
-# METODOS METODOS PARA LISTAS LOS REGISTROS #
-#############################################
+#####################################
+# METODOS PARA LISTAR LOS REGISTROS #
+#####################################
 """
 
 
@@ -400,7 +396,8 @@ class MultasListView(APIView):
             raise AuthenticationFailed("Unauthenticated!")
 
         user = Usuario.objects.filter(id=payload["id"]).first()
-        serializer = MultaSerializer(user.multas, many=True)
+        multa = Multa.objects.filter(id_usuario=user)
+        serializer = MultaSerializer(multa, many=True)
         return Response(serializer.data)
 
 
@@ -416,7 +413,8 @@ class VehiculosListView(APIView):
             raise AuthenticationFailed("Unauthenticated!")
 
         user = Usuario.objects.filter(id=payload["id"]).first()
-        serializer = VehiculoSerializer(user.vehiculos, many=True)
+        vehiculo = Vehiculo.objects.filter(id_usuario=user)
+        serializer = VehiculoSerializer(vehiculo, many=True)
         return Response(serializer.data)
 
 
@@ -432,7 +430,8 @@ class ReservasListView(APIView):
             raise AuthenticationFailed("Unauthenticated!")
 
         user = Usuario.objects.filter(id=payload["id"]).first()
-        serializer = ReservaSerializer(user.reservas, many=True)
+        reserva = Reserva.objects.filter(id_usuario=user)
+        serializer = ReservaSerializer(reserva, many=True)
         return Response(serializer.data)
 
 
