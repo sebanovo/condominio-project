@@ -1,0 +1,1400 @@
+[
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": {
+      "app_label": "contenttypes",
+      "model": "contenttype"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 2,
+    "fields": {
+      "app_label": "auth",
+      "model": "permission"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 3,
+    "fields": {
+      "app_label": "auth",
+      "model": "group"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 4,
+    "fields": {
+      "app_label": "sessions",
+      "model": "session"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields": {
+      "app_label": "admin",
+      "model": "logentry"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields": {
+      "app_label": "condominio",
+      "model": "areacomun"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields": {
+      "app_label": "condominio",
+      "model": "extranjero"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 8,
+    "fields": {
+      "app_label": "condominio",
+      "model": "usuario"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 9,
+    "fields": {
+      "app_label": "condominio",
+      "model": "casa"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 10,
+    "fields": {
+      "app_label": "condominio",
+      "model": "ingresosalida"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 11,
+    "fields": {
+      "app_label": "condominio",
+      "model": "multa"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 12,
+    "fields": {
+      "app_label": "condominio",
+      "model": "reserva"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 13,
+    "fields": {
+      "app_label": "condominio",
+      "model": "vehiculo"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+      "name": "Can add content type",
+      "content_type": 1,
+      "codename": "add_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+      "name": "Can change content type",
+      "content_type": 1,
+      "codename": "change_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+      "name": "Can delete content type",
+      "content_type": 1,
+      "codename": "delete_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 4,
+    "fields": {
+      "name": "Can view content type",
+      "content_type": 1,
+      "codename": "view_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 5,
+    "fields": {
+      "name": "Can add permission",
+      "content_type": 2,
+      "codename": "add_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 6,
+    "fields": {
+      "name": "Can change permission",
+      "content_type": 2,
+      "codename": "change_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 7,
+    "fields": {
+      "name": "Can delete permission",
+      "content_type": 2,
+      "codename": "delete_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 8,
+    "fields": {
+      "name": "Can view permission",
+      "content_type": 2,
+      "codename": "view_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 9,
+    "fields": {
+      "name": "Can add group",
+      "content_type": 3,
+      "codename": "add_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 10,
+    "fields": {
+      "name": "Can change group",
+      "content_type": 3,
+      "codename": "change_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 11,
+    "fields": {
+      "name": "Can delete group",
+      "content_type": 3,
+      "codename": "delete_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 12,
+    "fields": {
+      "name": "Can view group",
+      "content_type": 3,
+      "codename": "view_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+      "name": "Can add session",
+      "content_type": 4,
+      "codename": "add_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+      "name": "Can change session",
+      "content_type": 4,
+      "codename": "change_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+      "name": "Can delete session",
+      "content_type": 4,
+      "codename": "delete_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+      "name": "Can view session",
+      "content_type": 4,
+      "codename": "view_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+      "name": "Can add log entry",
+      "content_type": 5,
+      "codename": "add_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+      "name": "Can change log entry",
+      "content_type": 5,
+      "codename": "change_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 19,
+    "fields": {
+      "name": "Can delete log entry",
+      "content_type": 5,
+      "codename": "delete_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 20,
+    "fields": {
+      "name": "Can view log entry",
+      "content_type": 5,
+      "codename": "view_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+      "name": "Can add area comun",
+      "content_type": 6,
+      "codename": "add_areacomun"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+      "name": "Can change area comun",
+      "content_type": 6,
+      "codename": "change_areacomun"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+      "name": "Can delete area comun",
+      "content_type": 6,
+      "codename": "delete_areacomun"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+      "name": "Can view area comun",
+      "content_type": 6,
+      "codename": "view_areacomun"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+      "name": "Can add extranjero",
+      "content_type": 7,
+      "codename": "add_extranjero"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+      "name": "Can change extranjero",
+      "content_type": 7,
+      "codename": "change_extranjero"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+      "name": "Can delete extranjero",
+      "content_type": 7,
+      "codename": "delete_extranjero"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+      "name": "Can view extranjero",
+      "content_type": 7,
+      "codename": "view_extranjero"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 29,
+    "fields": {
+      "name": "Can add user",
+      "content_type": 8,
+      "codename": "add_usuario"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 30,
+    "fields": {
+      "name": "Can change user",
+      "content_type": 8,
+      "codename": "change_usuario"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 31,
+    "fields": {
+      "name": "Can delete user",
+      "content_type": 8,
+      "codename": "delete_usuario"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+      "name": "Can view user",
+      "content_type": 8,
+      "codename": "view_usuario"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 33,
+    "fields": {
+      "name": "Can add casa",
+      "content_type": 9,
+      "codename": "add_casa"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 34,
+    "fields": {
+      "name": "Can change casa",
+      "content_type": 9,
+      "codename": "change_casa"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 35,
+    "fields": {
+      "name": "Can delete casa",
+      "content_type": 9,
+      "codename": "delete_casa"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 36,
+    "fields": {
+      "name": "Can view casa",
+      "content_type": 9,
+      "codename": "view_casa"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 37,
+    "fields": {
+      "name": "Can add ingreso salida",
+      "content_type": 10,
+      "codename": "add_ingresosalida"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 38,
+    "fields": {
+      "name": "Can change ingreso salida",
+      "content_type": 10,
+      "codename": "change_ingresosalida"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 39,
+    "fields": {
+      "name": "Can delete ingreso salida",
+      "content_type": 10,
+      "codename": "delete_ingresosalida"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 40,
+    "fields": {
+      "name": "Can view ingreso salida",
+      "content_type": 10,
+      "codename": "view_ingresosalida"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 41,
+    "fields": {
+      "name": "Can add multa",
+      "content_type": 11,
+      "codename": "add_multa"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 42,
+    "fields": {
+      "name": "Can change multa",
+      "content_type": 11,
+      "codename": "change_multa"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 43,
+    "fields": {
+      "name": "Can delete multa",
+      "content_type": 11,
+      "codename": "delete_multa"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 44,
+    "fields": {
+      "name": "Can view multa",
+      "content_type": 11,
+      "codename": "view_multa"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 45,
+    "fields": {
+      "name": "Can add reserva",
+      "content_type": 12,
+      "codename": "add_reserva"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 46,
+    "fields": {
+      "name": "Can change reserva",
+      "content_type": 12,
+      "codename": "change_reserva"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 47,
+    "fields": {
+      "name": "Can delete reserva",
+      "content_type": 12,
+      "codename": "delete_reserva"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 48,
+    "fields": {
+      "name": "Can view reserva",
+      "content_type": 12,
+      "codename": "view_reserva"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 49,
+    "fields": {
+      "name": "Can add vehiculo",
+      "content_type": 13,
+      "codename": "add_vehiculo"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 50,
+    "fields": {
+      "name": "Can change vehiculo",
+      "content_type": 13,
+      "codename": "change_vehiculo"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 51,
+    "fields": {
+      "name": "Can delete vehiculo",
+      "content_type": 13,
+      "codename": "delete_vehiculo"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 52,
+    "fields": {
+      "name": "Can view vehiculo",
+      "content_type": 13,
+      "codename": "view_vehiculo"
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 1,
+    "fields": {
+      "name": "Administrador",
+      "permissions": [
+        17, 18, 19, 20, 9, 10, 11, 12, 5, 6, 7, 8, 21, 22, 23, 24, 33, 34, 35, 36, 25, 26,
+        27, 28, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 29, 30, 31, 32, 49, 50,
+        51, 52, 1, 2, 3, 4, 13, 14, 15, 16
+      ]
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 2,
+    "fields": {
+      "name": "Residente",
+      "permissions": []
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 3,
+    "fields": {
+      "name": "Personal",
+      "permissions": []
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "jnfaphzgi01kh4cmd02h7w6sjn4acizh",
+    "fields": {
+      "session_data": ".eJxVjcEOwiAQRP-FsyFsgS549N5vILBspWpoUtqT8d9tkx70Ou_NzFuEuK0lbI2XMGVxFSAuv1mK9OR6gPyI9T5Lmuu6TEkeijxpk8Oc-XU73b-BElvZ28koylZ3qDwAkB6TYQa0CjA7hx4QLbEiZ6xR2KPuALTvk9Up7i-j-HwBtVU21g:1v0Mrr:j_pWNzR7WL_8FxinHVatMSNOTsERYPfWjfCQ239LdoA",
+      "expire_date": "2025-10-05T16:24:51.867Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "s3o6e22ksuvznc9zdybwvuejyr4yabb0",
+    "fields": {
+      "session_data": ".eJxVjcEOwiAQRP-FsyFsgS549N5vILBspWpoUtqT8d9tkx70Ou_NzFuEuK0lbI2XMGVxFSAuv1mK9OR6gPyI9T5Lmuu6TEkeijxpk8Oc-XU73b-BElvZ28koylZ3qDwAkB6TYQa0CjA7hx4QLbEiZ6xR2KPuALTvk9Up7i-j-HwBtVU21g:1v0MDd:Tzrq1pEEdUTb1rAEY4vGiTm8FBVc7hnniL2shXmt0ZY",
+      "expire_date": "2025-10-05T15:43:17.291Z"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+      "action_time": "2025-09-21T15:45:09.865Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "2",
+      "object_repr": "messi - messi@gmail.com",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+      "action_time": "2025-09-21T15:45:25.934Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "3",
+      "object_repr": "cr7 - cr7@gmail.com",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+      "action_time": "2025-09-21T15:46:13.936Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "4",
+      "object_repr": "lucas - lucas@gmail.com",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+      "action_time": "2025-09-21T15:46:41.654Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "5",
+      "object_repr": "brayan - braya@gmail.com",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+      "action_time": "2025-09-21T15:48:18.846Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "1",
+      "object_repr": "Casa object (1)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+      "action_time": "2025-09-21T15:48:33.162Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "2",
+      "object_repr": "Casa object (2)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+      "action_time": "2025-09-21T15:48:44.979Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "3",
+      "object_repr": "Casa object (3)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+      "action_time": "2025-09-21T15:48:53.789Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "4",
+      "object_repr": "Casa object (4)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 9,
+    "fields": {
+      "action_time": "2025-09-21T15:49:54.234Z",
+      "user": 1,
+      "content_type": 13,
+      "object_id": "1",
+      "object_repr": "Vehiculo object (1)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 10,
+    "fields": {
+      "action_time": "2025-09-21T15:50:15.580Z",
+      "user": 1,
+      "content_type": 13,
+      "object_id": "2",
+      "object_repr": "Vehiculo object (2)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 11,
+    "fields": {
+      "action_time": "2025-09-21T15:50:35.221Z",
+      "user": 1,
+      "content_type": 13,
+      "object_id": "3",
+      "object_repr": "Vehiculo object (3)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 12,
+    "fields": {
+      "action_time": "2025-09-21T15:51:00.259Z",
+      "user": 1,
+      "content_type": 13,
+      "object_id": "4",
+      "object_repr": "Vehiculo object (4)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 13,
+    "fields": {
+      "action_time": "2025-09-21T15:51:27.225Z",
+      "user": 1,
+      "content_type": 3,
+      "object_id": "1",
+      "object_repr": "Administrador",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 14,
+    "fields": {
+      "action_time": "2025-09-21T15:52:07.430Z",
+      "user": 1,
+      "content_type": 3,
+      "object_id": "2",
+      "object_repr": "Residente",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 15,
+    "fields": {
+      "action_time": "2025-09-21T15:52:48.094Z",
+      "user": 1,
+      "content_type": 3,
+      "object_id": "2",
+      "object_repr": "Residente",
+      "action_flag": 2,
+      "change_message": "[]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 16,
+    "fields": {
+      "action_time": "2025-09-21T15:53:46.298Z",
+      "user": 1,
+      "content_type": 3,
+      "object_id": "3",
+      "object_repr": "Personal",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 17,
+    "fields": {
+      "action_time": "2025-09-21T15:54:01.306Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "5",
+      "object_repr": "brayan - braya@gmail.com",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Groups\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 18,
+    "fields": {
+      "action_time": "2025-09-21T15:54:05.353Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "4",
+      "object_repr": "lucas - lucas@gmail.com",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Groups\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 19,
+    "fields": {
+      "action_time": "2025-09-21T15:54:11.731Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "3",
+      "object_repr": "cr7 - cr7@gmail.com",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Groups\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 20,
+    "fields": {
+      "action_time": "2025-09-21T15:54:17.528Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "2",
+      "object_repr": "messi - messi@gmail.com",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Groups\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 21,
+    "fields": {
+      "action_time": "2025-09-21T15:54:29.391Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "1",
+      "object_repr": "None - correo@gmail.com",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Groups\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 22,
+    "fields": {
+      "action_time": "2025-09-21T15:55:16.480Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "1",
+      "object_repr": "Multa object (1)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 23,
+    "fields": {
+      "action_time": "2025-09-21T15:55:39.446Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "2",
+      "object_repr": "Multa object (2)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 24,
+    "fields": {
+      "action_time": "2025-09-21T15:57:09.953Z",
+      "user": 1,
+      "content_type": 6,
+      "object_id": "1",
+      "object_repr": "AreaComun object (1)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 25,
+    "fields": {
+      "action_time": "2025-09-21T15:57:52.663Z",
+      "user": 1,
+      "content_type": 6,
+      "object_id": "2",
+      "object_repr": "AreaComun object (2)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 26,
+    "fields": {
+      "action_time": "2025-09-21T15:58:19.625Z",
+      "user": 1,
+      "content_type": 6,
+      "object_id": "3",
+      "object_repr": "AreaComun object (3)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 27,
+    "fields": {
+      "action_time": "2025-09-21T15:59:06.563Z",
+      "user": 1,
+      "content_type": 6,
+      "object_id": "4",
+      "object_repr": "AreaComun object (4)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 28,
+    "fields": {
+      "action_time": "2025-09-21T16:13:16.032Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "1",
+      "object_repr": "messi - messi@gmail.com - Dejo a su perro afuera y se cago en el patio de los vecinos - 20 - pendiente",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 29,
+    "fields": {
+      "action_time": "2025-09-21T16:13:48.646Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "2",
+      "object_repr": "cr7 - cr7@gmail.com - Dejo la basura afuera y lo deshicieron los perros y esta un asco la calle - 100 - pendiente",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 30,
+    "fields": {
+      "action_time": "2025-09-21T16:14:40.269Z",
+      "user": 1,
+      "content_type": 12,
+      "object_id": "1",
+      "object_repr": "2025-09-22 12:00:00-04:00 - (<django.db.models.fields.CharField>,)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 31,
+    "fields": {
+      "action_time": "2025-09-21T16:15:10.188Z",
+      "user": 1,
+      "content_type": 12,
+      "object_id": "2",
+      "object_repr": "2025-09-22 12:00:00-04:00 - (<django.db.models.fields.CharField>,)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 32,
+    "fields": {
+      "action_time": "2025-09-21T16:15:31.224Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "Extranjero object (1)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 33,
+    "fields": {
+      "action_time": "2025-09-21T16:15:49.623Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "2",
+      "object_repr": "Extranjero object (2)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 34,
+    "fields": {
+      "action_time": "2025-09-21T16:26:17.505Z",
+      "user": 1,
+      "content_type": 10,
+      "object_id": "1",
+      "object_repr": "2025-09-21 12:00:00-04:00 - ingreso - pie",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 35,
+    "fields": {
+      "action_time": "2025-09-21T16:26:34.767Z",
+      "user": 1,
+      "content_type": 10,
+      "object_id": "2",
+      "object_repr": "2025-09-22 18:00:00-04:00 - salida - pie",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 36,
+    "fields": {
+      "action_time": "2025-09-21T16:30:54.743Z",
+      "user": 1,
+      "content_type": 12,
+      "object_id": "2",
+      "object_repr": "2025-09-22 12:00:00-04:00 - pendiente",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Estado pago\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 37,
+    "fields": {
+      "action_time": "2025-09-21T16:31:00.002Z",
+      "user": 1,
+      "content_type": 12,
+      "object_id": "1",
+      "object_repr": "2025-09-22 12:00:00-04:00 - pendiente",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Estado pago\"]}}]"
+    }
+  },
+  {
+    "model": "condominio.usuario",
+    "pk": 1,
+    "fields": {
+      "last_login": "2025-09-21T16:24:51.861Z",
+      "is_superuser": true,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2025-09-21T15:43:08Z",
+      "username": null,
+      "email": "correo@gmail.com",
+      "password": "pbkdf2_sha256$870000$TiJRx3uYEQVHL5NEYk0hl0$BmsrH24iVBFTEPHdv7+U2XgsI8F0EyhOX/5/WZr6cZ0=",
+      "photo": "",
+      "groups": [1],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "condominio.usuario",
+    "pk": 2,
+    "fields": {
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-09-21T15:44:25Z",
+      "username": "messi",
+      "email": "messi@gmail.com",
+      "password": "password",
+      "photo": "",
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "condominio.usuario",
+    "pk": 3,
+    "fields": {
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-09-21T15:45:11Z",
+      "username": "cr7",
+      "email": "cr7@gmail.com",
+      "password": "password",
+      "photo": "",
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "condominio.usuario",
+    "pk": 4,
+    "fields": {
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-09-21T15:45:48Z",
+      "username": "lucas",
+      "email": "lucas@gmail.com",
+      "password": "password",
+      "photo": "",
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "condominio.usuario",
+    "pk": 5,
+    "fields": {
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-09-21T15:46:15Z",
+      "username": "brayan",
+      "email": "braya@gmail.com",
+      "password": "password",
+      "photo": "",
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "condominio.casa",
+    "pk": 1,
+    "fields": {
+      "nro": "1",
+      "categoria": "Estandar",
+      "capacidad": 4,
+      "usuarios": [2]
+    }
+  },
+  {
+    "model": "condominio.casa",
+    "pk": 2,
+    "fields": {
+      "nro": "2",
+      "categoria": "Estandar",
+      "capacidad": 6,
+      "usuarios": [3]
+    }
+  },
+  {
+    "model": "condominio.casa",
+    "pk": 3,
+    "fields": {
+      "nro": "3",
+      "categoria": "Premium",
+      "capacidad": 10,
+      "usuarios": [4]
+    }
+  },
+  {
+    "model": "condominio.casa",
+    "pk": 4,
+    "fields": {
+      "nro": "4",
+      "categoria": "Premium",
+      "capacidad": 10,
+      "usuarios": [5]
+    }
+  },
+  {
+    "model": "condominio.vehiculo",
+    "pk": 1,
+    "fields": {
+      "placa": "1234ABC",
+      "tipo": "auto",
+      "color": "rojo",
+      "id_usuario": 2
+    }
+  },
+  {
+    "model": "condominio.vehiculo",
+    "pk": 2,
+    "fields": {
+      "placa": "4742ABS",
+      "tipo": "auto",
+      "color": "amarillo",
+      "id_usuario": 3
+    }
+  },
+  {
+    "model": "condominio.vehiculo",
+    "pk": 3,
+    "fields": {
+      "placa": "7890FDA",
+      "tipo": "bici",
+      "color": "azul",
+      "id_usuario": 5
+    }
+  },
+  {
+    "model": "condominio.vehiculo",
+    "pk": 4,
+    "fields": {
+      "placa": "1736ABD",
+      "tipo": "patineta",
+      "color": "verde",
+      "id_usuario": 4
+    }
+  },
+  {
+    "model": "condominio.areacomun",
+    "pk": 1,
+    "fields": {
+      "nombre": "Piscina",
+      "descripcion": "Lugar para divertirse nadando en la piscina",
+      "horario": "8:00am-18pm",
+      "costo": "40.00"
+    }
+  },
+  {
+    "model": "condominio.areacomun",
+    "pk": 2,
+    "fields": {
+      "nombre": "Zona Parrillada",
+      "descripcion": "zona para comer y hacer parrillada",
+      "horario": "8:00am-18pm",
+      "costo": "20.00"
+    }
+  },
+  {
+    "model": "condominio.areacomun",
+    "pk": 3,
+    "fields": {
+      "nombre": "Cancha",
+      "descripcion": "lugar para jugar futbol, backetball o cualquier deporte",
+      "horario": "8:00am-18pm",
+      "costo": "10.00"
+    }
+  },
+  {
+    "model": "condominio.areacomun",
+    "pk": 4,
+    "fields": {
+      "nombre": "Gimnasio",
+      "descripcion": "lugar para ejercitarse y ponerse to fuerte",
+      "horario": "8:00am-18pm",
+      "costo": "60.00"
+    }
+  },
+  {
+    "model": "condominio.reserva",
+    "pk": 1,
+    "fields": {
+      "id_usuario": 2,
+      "id_area": 1,
+      "fecha": "2025-09-22T16:00:00Z",
+      "estado_pago": "pendiente",
+      "metodo_pago": "tarjeta"
+    }
+  },
+  {
+    "model": "condominio.reserva",
+    "pk": 2,
+    "fields": {
+      "id_usuario": 3,
+      "id_area": 3,
+      "fecha": "2025-09-22T16:00:00Z",
+      "estado_pago": "pendiente",
+      "metodo_pago": "tarjeta"
+    }
+  },
+  {
+    "model": "condominio.multa",
+    "pk": 1,
+    "fields": {
+      "id_usuario": 2,
+      "descripcion": "Dejo a su perro afuera y se cago en el patio de los vecinos",
+      "monto": "20.00",
+      "fecha": "2025-09-21",
+      "estado_pago": "pendiente",
+      "metodo_pago": "tarjeta"
+    }
+  },
+  {
+    "model": "condominio.multa",
+    "pk": 2,
+    "fields": {
+      "id_usuario": 3,
+      "descripcion": "Dejo la basura afuera y lo deshicieron los perros y esta un asco la calle",
+      "monto": "100.00",
+      "fecha": "2025-09-20",
+      "estado_pago": "pendiente",
+      "metodo_pago": "tarjeta"
+    }
+  },
+  {
+    "model": "condominio.extranjero",
+    "pk": 1,
+    "fields": {
+      "ci": "78447743",
+      "nombre": "Juan Gabriel Gonzales"
+    }
+  },
+  {
+    "model": "condominio.extranjero",
+    "pk": 2,
+    "fields": {
+      "ci": "7486532",
+      "nombre": "Selena Gomez Arispe"
+    }
+  },
+  {
+    "model": "condominio.ingresosalida",
+    "pk": 1,
+    "fields": {
+      "id_usuario": null,
+      "fecha": "2025-09-21T16:00:00Z",
+      "tipo": "ingreso",
+      "modo": "pie",
+      "extranjero": 1,
+      "es_extranjero": true
+    }
+  },
+  {
+    "model": "condominio.ingresosalida",
+    "pk": 2,
+    "fields": {
+      "id_usuario": null,
+      "fecha": "2025-09-22T22:00:00Z",
+      "tipo": "salida",
+      "modo": "pie",
+      "extranjero": 1,
+      "es_extranjero": true
+    }
+  }
+]

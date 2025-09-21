@@ -46,12 +46,12 @@ INSTALLED_APPS = [
     "rest_framework",
     "drf_spectacular",
     # proyectos
-    "accounts",
+    "condominio",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware", # para archivos estaticos en produccion
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # para archivos estaticos en produccion
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -79,7 +79,7 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = "accounts.User"
+AUTH_USER_MODEL = "condominio.Usuario"
 
 TEMPLATES = [
     {

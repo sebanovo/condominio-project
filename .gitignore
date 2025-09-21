@@ -7,6 +7,9 @@ db.sqlite3
 media/
 staticfiles/
 
+**/migrations/*
+!**/migrations/__init__.py
+
 # Entornos virtuales
 venv/
 env/

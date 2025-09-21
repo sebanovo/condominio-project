@@ -4,8 +4,11 @@ set -e
 echo "Esperando a PostgreSQL en $POSTGRES_HOST:$POSTGRES_PORT..."
 until python - <<'PY'
 import os, socket, sys
+
 host=os.environ.get("POSTGRES_HOST","db")
+
 port=int(os.environ.get("POSTGRES_PORT","5432"))
+
 try:
     with socket.create_connection((host, port), timeout=2):
         sys.exit(0)
@@ -27,21 +30,30 @@ if [ -n "$DJANGO_SUPERUSER_EMAIL" ] && [ -n "$DJANGO_SUPERUSER_PASSWORD" ]; then
   echo "Creando/actualizando superuser $DJANGO_SUPERUSER_EMAIL ..."
   python manage.py shell -c "
 from django.contrib.auth import get_user_model
+
 import os
+
 U = get_user_model()
+
 email = os.getenv('DJANGO_SUPERUSER_EMAIL')
+
 pwd = os.getenv('DJANGO_SUPERUSER_PASSWORD')
+
 u, created = U.objects.get_or_create(
     email=email,
     defaults={'is_staff': True, 'is_superuser': True, 'is_active': True}
 )
 if pwd:
     u.set_password(pwd); u.save()
+
 print('Superuser listo:', email, '(creado)' if created else '(actualizado)')
 "
 else
   echo "DJANGO_SUPERUSER_EMAIL/PASSWORD no definidos; omito creación de superuser."
 fi
+
+echo "Cargando datos iniciales de initial_data.json"
+python manage.py loaddata initial_data.json || true
 
 # >>>>>>>>>>>>>>>>>>>>>>> SUPERUSER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 # Static/Media
