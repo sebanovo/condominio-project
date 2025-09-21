@@ -29,10 +29,16 @@ import datetime
 from .serializers import UsuarioSerializer
 import jwt
 
+"""
+#####################################
+# AUTENTICACION DE USUARIOS CON JWT #
+#####################################
+"""
+
 
 class SignUpView(APIView):
     def post(self, request):
-        print("Entro Aqui")
+        """Registro de usuario y crear token JWT"""
         serializer = UsuarioSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -51,6 +57,7 @@ class SignUpView(APIView):
 
 class LoginView(APIView):
     def post(self, request):
+        """Login de usuario y crear token JWT"""
         email = request.data["email"]
         password = request.data["password"]
 
@@ -73,8 +80,22 @@ class LoginView(APIView):
         return response
 
 
+class LogoutView(APIView):
+    def post(self, request):
+        """
+        Eliminar la cookie del token JWT para cerrar sesión
+        """
+        response = Response()
+        response.delete_cookie("jwt")
+        response.data = {"message": "success"}
+        return response
+
+
 class UserView(APIView):
     def get(self, request):
+        """
+        Obtener datas del usuario autenticado
+        """
         token = request.COOKIES.get("jwt")
 
         if not token:
@@ -90,12 +111,11 @@ class UserView(APIView):
         return Response(serializer.data)
 
 
-class LogoutView(APIView):
-    def post(self, request):
-        response = Response()
-        response.delete_cookie("jwt")
-        response.data = {"message": "success"}
-        return response
+"""
+#####################################################
+# METODOS QUE EL ADMIN Y/O EL PERSONAL PUEDEN HACER #
+#####################################################
+"""
 
 
 class CasaView(APIView):
@@ -115,15 +135,246 @@ class CasaView(APIView):
         return Response(serializer.data)
 
 
-# class CasaListCreateView(ListCreateAPIView):
-#     # queryset = Casa.objects.all()
-#     # serializer_class = CasaSerializer
-#     # permission_classes = [IsAuthenticated]
+class AsignarCasaView(APIView):
+    def post(self, request):
+        """Asignar casa a usuario (solo admin, puede hacerlo)"""
+        token = request.COOKIES.get("jwt")
+        if not token:
+            raise AuthenticationFailed("Unauthenticated!")
+        try:
+            payload = jwt.decode(token, "secret", algorithms=["HS256"])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed("Unauthenticated!")
+        user = Usuario.objects.filter(id=payload["id"]).first()
+
+        if not user.groups.all().filter(name="Admin").exists():
+            raise AuthenticationFailed("You are not admin")
+
+        # asignar casa a usuario no crear la casa
+        user_id = request.data["user_id"]
+        casa_id = request.data["casa_id"]
+        casa = Casa.objects.filter(id=casa_id).first()
+        casa.usuarios.add(user_id)
+        casa.save()
+        return Response({"message": "casa assigned to user successfully"})
 
 
-class CasaListCreateView(APIView):
-    # obtener las casas del usuario autenticado
+class AsignarMultaView(APIView):
+    def post(self, request):
+        """Asignar multa a usuario (solo admin, puede hacerlo)"""
+        token = request.COOKIES.get("jwt")
+        if not token:
+            raise AuthenticationFailed("Unauthenticated!")
+        try:
+            payload = jwt.decode(token, "secret", algorithms=["HS256"])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed("Unauthenticated!")
+        user = Usuario.objects.filter(id=payload["id"]).first()
+
+        if not user.groups.all().filter(name="Admin").exists():
+            raise AuthenticationFailed("You are not admin")
+
+        user_id = request.data["user_id"]
+        multa_id = request.data["multa_id"]
+        multa = Multa.objects.filter(id=multa_id).first()
+        multa.usuarios.add(user_id)
+        multa.save()
+        return Response({"message": "multa assigned to user successfully"})
+
+
+class IngresoSalidaView(APIView):
+    def post(self, request):
+        """Crear ingreso/salida a usuario (solo Administrador y Personal, puede hacerlo)"""
+        token = request.COOKIES.get("jwt")
+        if not token:
+            raise AuthenticationFailed("Unauthenticated!")
+        try:
+            payload = jwt.decode(token, "secret", algorithms=["HS256"])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed("Unauthenticated!")
+        user = Usuario.objects.filter(id=payload["id"]).first()
+
+        roles = user.groups.all()
+        if (
+            not roles.filter(name="Admin").exists()
+            or not roles.filter(name="Personal").exists()
+        ):
+            raise AuthenticationFailed("You are not admin or personal")
+
+        persona_id = request.data["persona_id"]
+
+        # crear un ingreso salida
+        new_ingreso_salida = IngresoSalida.objects.create(
+            fecha=request.data["fecha"],
+            tipo=request.data["tipo"],
+            modo=request.data["modo"],
+            es_extranjero=request.data["es_extranjero"],
+        )
+
+        if request.data["es_extranjero"]:
+            new_ingreso_salida.extranjero_id = persona_id
+        else:
+            new_ingreso_salida.id_usuario_id = persona_id
+
+        new_ingreso_salida.save()
+        return Response({"message": "ingreso/salida assigned to persona successfully"})
+
+
+class VehiculoView(APIView):
+    def post(self, request):
+        """Crear vehiculo (solo admin y personal, puede hacerlo)"""
+        token = request.COOKIES.get("jwt")
+
+        if not token:
+            raise AuthenticationFailed("Unauthenticated!")
+
+        try:
+            payload = jwt.decode(token, "secret", algorithms=["HS256"])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed("Unauthenticated!")
+
+        roles = Usuario.objects.filter(id=payload["id"]).first().groups.all()
+        if (
+            not roles.filter(name="Admin").exists()
+            or not roles.filter(name="Personal").exists()
+        ):
+            raise AuthenticationFailed("You are not admin or personal")
+
+        new_vehiculo = Vehiculo.objects.create(
+            placa=request.data["placa"],
+            tipo=request.data["tipo"],
+            color=request.data["color"],
+        )
+        new_vehiculo.id_usuario = request.data["id_usuario"]
+        new_vehiculo.save()
+        return Response({"message": "vehiculo created successfully"})
+
+
+class AsignarVehiculoView(APIView):
+    def post(self, request):
+        """Asignar vehiculo a usuario (solo admin, puede hacerlo)"""
+        token = request.COOKIES.get("jwt")
+        if not token:
+            raise AuthenticationFailed("Unauthenticated!")
+        try:
+            payload = jwt.decode(token, "secret", algorithms=["HS256"])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed("Unauthenticated!")
+        user = Usuario.objects.filter(id=payload["id"]).first()
+
+        if not user.groups.all().filter(name="Admin").exists():
+            raise AuthenticationFailed("You are not admin")
+
+        user_id = request.data["user_id"]
+        vehiculo_id = request.data["vehiculo_id"]
+
+        vehiculo = Vehiculo.objects.filter(id=vehiculo_id).first()
+        # asignar el vehiculo al usuario
+        vehiculo.id_usuario = user_id
+        vehiculo.save()
+        return Response({"message": "vehiculo assigned to user successfully"})
+
+
+class ReservaView(APIView):
+    def post(self, request):
+        """Asignar reserva a usuario (solo Admin y Personal, puede hacerlo)"""
+        token = request.COOKIES.get("jwt")
+        if not token:
+            raise AuthenticationFailed("Unauthenticated!")
+        try:
+            payload = jwt.decode(token, "secret", algorithms=["HS256"])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed("Unauthenticated!")
+        user = Usuario.objects.filter(id=payload["id"]).first()
+
+        roles = user.groups.all()
+        if (
+            not roles.filter(name="Admin").exists()
+            or roles.filter(name="Personal").exists()
+        ):
+            raise AuthenticationFailed("You are not admin or personal")
+
+        user_id = request.data["user_id"]
+        reserva_id = request.data["reserva_id"]
+        new_reserva = Reserva.objects.create(
+            id_area_comun=request.data["id_area_comun"],
+            fecha=request.data["fecha"],
+            estado_pago=request.data["estado_pago"],
+            metodo_pago=request.data["metodo_pago"],
+        )
+        new_reserva.id_area = reserva_id
+        new_reserva.id_usuario = user_id
+        new_reserva.save()
+        return Response({"message": "reserva assigned to user successfully"})
+
+
+class AreaComunView(APIView):
+    def post(self, request):
+        """Crear area comun (solo Admin y Personal, puede hacerlo)"""
+        token = request.COOKIES.get("jwt")
+        if not token:
+            raise AuthenticationFailed("Unauthenticated!")
+        try:
+            payload = jwt.decode(token, "secret", algorithms=["HS256"])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed("Unauthenticated!")
+        user = Usuario.objects.filter(id=payload["id"]).first()
+
+        roles = user.groups.all()
+        if (
+            not roles.filter(name="Admin").exists()
+            or not roles.filter(name="Personal").exists()
+        ):
+            raise AuthenticationFailed("You are not admin or personal")
+
+        new_area = AreaComun.objects.create(
+            nombre=request.data["nombre"],
+            descripcion=request.data["descripcion"],
+            horario=request.data["horario"],
+            costo=request.data["costo"],
+        )
+        new_area.save()
+        return Response({"message": "area comun created successfully"})
+
+
+class ExtranjeroView(APIView):
+    def post(self, request):
+        """Crear extranjero (solo admin y personal, puede hacerlo)"""
+        token = request.COOKIES.get("jwt")
+
+        if not token:
+            raise AuthenticationFailed("Unauthenticated!")
+
+        try:
+            payload = jwt.decode(token, "secret", algorithms=["HS256"])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed("Unauthenticated!")
+
+        roles = Usuario.objects.filter(id=payload["id"]).first().groups.all()
+        if (
+            not roles.filter(name="Admin").exists()
+            or not roles.filter(name="Personal").exists()
+        ):
+            raise AuthenticationFailed("You are not admin or personal")
+
+        new_extranjero = Extranjero.objects.create(
+            ci=request.data["ci"],
+            nombre=request.data["nombre"],
+        )
+        new_extranjero.save()
+        return Response({"message": "extranjero created successfully"})
+
+
+"""
+#############################################
+# METODOS METODOS PARA LISTAS LOS REGISTROS #
+#############################################
+"""
+
+
+class CasasListView(APIView):
     def get(self, request):
+        """Ver casas del residente autenticado"""
         casas = Casa.objects.all()
         serializer = CasaSerializer(casas, many=True)
         token = request.COOKIES.get("jwt")
@@ -136,32 +387,76 @@ class CasaListCreateView(APIView):
         serializer = CasaSerializer(user.casas, many=True)
         return Response(serializer.data)
 
-    # Asignar casa a usuario (solo admin, puede hacerlo)
-    def post(self, request):
+
+class MultasListView(APIView):
+    def get(self, request):
+        """Ver multas del residente autenticado"""
+        multas = Multa.objects.all()
+        serializer = MultaSerializer(multas, many=True)
         token = request.COOKIES.get("jwt")
-        if not token:
-            raise AuthenticationFailed("Unauthenticated!")
         try:
             payload = jwt.decode(token, "secret", algorithms=["HS256"])
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed("Unauthenticated!")
+
         user = Usuario.objects.filter(id=payload["id"]).first()
-        if not user.is_superuser:
-            raise AuthenticationFailed("You are not admin")
-        # asignar casa a usuario no crear la casa
-        user_id = request.data["user_id"]
-        casa_id = request.data["casa_id"]
-        casa = Casa.objects.filter(id=casa_id).first()
-        casa.usuarios.add(user_id)
-        casa.save()
-        return Response({"message": "casa assigned to user successfully"})
+        serializer = MultaSerializer(user.multas, many=True)
+        return Response(serializer.data)
 
-    # def put(self, request, pk):
-    #     casa = Casa.objects.get(pk=pk)
-    #     serializer = CasaSerializer(casa, data=request.data)
 
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response(serializer.data)
+class VehiculosListView(APIView):
+    def get(self, request):
+        """Ver vehiculos del residente autenticado"""
+        vehiculos = Vehiculo.objects.all()
+        serializer = VehiculoSerializer(vehiculos, many=True)
+        token = request.COOKIES.get("jwt")
+        try:
+            payload = jwt.decode(token, "secret", algorithms=["HS256"])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed("Unauthenticated!")
 
-    #     return Response(serializer.errors, status=400)
+        user = Usuario.objects.filter(id=payload["id"]).first()
+        serializer = VehiculoSerializer(user.vehiculos, many=True)
+        return Response(serializer.data)
+
+
+class ReservasListView(APIView):
+    def get(self, request):
+        """Ver reservas del residente autenticado"""
+        reservas = Reserva.objects.all()
+        serializer = ReservaSerializer(reservas, many=True)
+        token = request.COOKIES.get("jwt")
+        try:
+            payload = jwt.decode(token, "secret", algorithms=["HS256"])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed("Unauthenticated!")
+
+        user = Usuario.objects.filter(id=payload["id"]).first()
+        serializer = ReservaSerializer(user.reservas, many=True)
+        return Response(serializer.data)
+
+
+class AreasComunesListView(APIView):
+    def get(self, request):
+        """Ver areas comunes"""
+        areas = AreaComun.objects.all()
+        serializer = AreaComunSerializer(areas, many=True)
+        return Response(serializer.data)
+
+
+# admin
+# asignar casa a usuario ✔
+# asignar multa a usuario ✔
+
+# admin y personal
+# asignar ingreso/salida a usuario ✔
+# asignar vehiculo a usuario ✔
+# asignar reserva a usuario ✔
+
+# residente
+# ver sus casas ✔
+# ver sus multas ✔
+# ver sus vehiculos ✔
+# ver sus ingresos/salidas ✔
+# ver sus reservas ✔
+# ver areas comunes ✔
