@@ -2,50 +2,55 @@ import { useState } from 'react';
 import Sidebar from '../components/SideBar';
 import { SYSTEM_NAME } from '../constants/index';
 import { useNavigate } from 'react-router-dom';
+import { server } from '../utils/server';
 import {
-  StudentsContent,
-  TeachersContent,
-  CoursesContent,
-  GradesContent,
-  ReportsContent,
-  SettingsContent,
   DashboardContent,
+  LevelsContent,
+  PeriodsContent,
+  GradesContent,
+  SectionsContent,
+  SubjectsContent,
+  PersonsContent,
+  StudentsContent,
+  EnrollmentsContent,
+  // ReportsContent,
 } from './content';
 
 export default function PanelAdminPage() {
   const [activeSection, setActiveSection] = useState('dashboard');
   const navigate = useNavigate();
 
-  const handleLogOut = () => {
-    fetch('api/auth/logout/', { method: 'POST', credentials: 'include' })
-      .then((response) => {
-        if (response.ok) {
-          navigate('/login');
-        } else {
-          alert('Error al cerrar sesión');
-        }
-      })
-      .catch((error) => {
-        console.error('Error al cerrar sesión:', error);
-      });
+  const handleLogOut = async () => {
+    try {
+      await server().logout();
+      navigate('/login');
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+    }
   };
 
   const renderContent = () => {
     switch (activeSection) {
       case 'dashboard':
         return <DashboardContent />;
-      case 'students':
-        return <StudentsContent />;
-      case 'teachers':
-        return <TeachersContent />;
-      case 'courses':
-        return <CoursesContent />;
+      case 'levels':
+        return <LevelsContent />;
+      case 'periods':
+        return <PeriodsContent />;
       case 'grades':
         return <GradesContent />;
-      case 'reports':
-        return <ReportsContent />;
-      case 'settings':
-        return <SettingsContent />;
+      case 'sections':
+        return <SectionsContent />;
+      case 'subjects':
+        return <SubjectsContent />;
+      case 'persons':
+        return <PersonsContent />;
+      case 'students':
+        return <StudentsContent />;
+      case 'enrollments':
+        return <EnrollmentsContent />;
+      // case 'reports':
+      //   return <ReportsContent />;
       default:
         return <DashboardContent />;
     }
