@@ -16,17 +16,6 @@ from .models import (
     Extranjero,
 )
 
-from .serializers import (
-    UsuarioSerializer,
-    CasaSerializer,
-    VehiculoSerializer,
-    AreaComunSerializer,
-    ReservaSerializer,
-    MultaSerializer,
-    IngresoSalidaSerializer,
-    ExtranjeroSerializer,
-)
-
 admin.site.register(Usuario)
 admin.site.register(Casa)
 admin.site.register(Vehiculo)
