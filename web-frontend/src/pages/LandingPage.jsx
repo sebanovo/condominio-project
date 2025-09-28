@@ -6,7 +6,7 @@ import TestimonialCard from '../components/TestimonialCard';
 
 function LandingPage() {
   return (
-    <main className='flex min-h-screen flex-col bg-gradient-to-br from-blue-50 to-indigo-100'>
+    <main className='flex min-h-screen flex-col bg-gradient-to-br from-amber-50 to-green-50'>
       <NavBar
         routes={[
           {
@@ -24,23 +24,23 @@ function LandingPage() {
         ]}
       ></NavBar>
       <header className='flex flex-col items-center justify-center px-4 py-16 text-center'>
-        <h1 className='mb-6 text-4xl font-extrabold text-indigo-800 md:text-6xl'>
-          Transforma la Gestión de tu Institución Educativa
+        <h1 className='mb-6 text-4xl font-extrabold text-green-800 md:text-6xl'>
+          Transforma la Gestión de tu Condominio
         </h1>
         <p className='mb-8 max-w-3xl text-lg text-gray-700 md:text-xl'>
-          La plataforma todo-en-uno que simplifica la administración escolar, mejora la comunicación
-          y optimiza los procesos académicos.
+          La plataforma todo-en-uno que simplifica la administración de condominios, mejora la
+          comunicación con residentes y optimiza los procesos de mantenimiento.
         </p>
         <div className='flex flex-col gap-4 sm:flex-row'>
           <a
             href='#pricing'
-            className='rounded-lg bg-indigo-600 px-8 py-3 font-semibold text-white shadow transition hover:bg-indigo-700'
+            className='rounded-lg bg-green-600 px-8 py-3 font-semibold text-white shadow transition hover:bg-green-700'
           >
             Comenzar gratis
           </a>
         </div>
         <img
-          src='https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80'
+          src='https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80'
           alt={`Dashboard ${SYSTEM_NAME}`}
           className='mt-12 w-full max-w-5xl rounded-xl border border-gray-200 shadow-2xl'
         />
@@ -48,19 +48,19 @@ function LandingPage() {
       {/* Features Section */}
       <section id='features' className='bg-white px-4 py-16'>
         <div className='mx-auto max-w-6xl'>
-          <h2 className='mb-4 text-center text-3xl font-bold text-indigo-800 md:text-4xl'>
-            Todo lo que necesitas en una sola plataforma
+          <h2 className='mb-4 text-center text-3xl font-bold text-green-800 md:text-4xl'>
+            Todo lo que necesitas para administrar tu condominio
           </h2>
           <p className='mx-auto mb-12 max-w-3xl text-center text-gray-600'>
-            Diseñado específicamente para instituciones educativas, con herramientas que facilitan
-            el día a día.
+            Diseñado específicamente para condominios y conjuntos residenciales, con herramientas
+            que facilitan la gestión diaria.
           </p>
 
           <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
             <FeatureCard
               icon={
                 <svg
-                  className='h-6 w-6 text-indigo-600'
+                  className='h-6 w-6 text-amber-600'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'
@@ -70,39 +70,18 @@ function LandingPage() {
                     strokeLinecap='round'
                     strokeLinejoin='round'
                     strokeWidth='2'
-                    d='M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z'
+                    d='M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'
                   ></path>
                 </svg>
               }
-              title='Gestión Estudiantil'
-              description='Administra matrículas, historiales académicos, asistencia y toda la información de tus estudiantes.'
+              title='Gestión de Residentes'
+              description='Administra información de residentes, unidades habitacionales, y mantén un directorio actualizado.'
             ></FeatureCard>
 
             <FeatureCard
               icon={
                 <svg
-                  className='h-6 w-6 text-indigo-600'
-                  fill='none'
-                  stroke='currentColor'
-                  viewBox='0 0 24 24'
-                  xmlns='http://www.w3.org/2000/svg'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth='2'
-                    d='M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2'
-                  ></path>
-                </svg>
-              }
-              title='Calificaciones y Evaluaciones'
-              description='Registra y analiza el rendimiento académico con reportes detallados y personalizables.'
-            ></FeatureCard>
-
-            <FeatureCard
-              icon={
-                <svg
-                  className='h-6 w-6 text-indigo-600'
+                  className='h-6 w-6 text-amber-600'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'
@@ -116,110 +95,90 @@ function LandingPage() {
                   ></path>
                 </svg>
               }
-              title='Gestión Financiera'
-              description='Controla pagos, facturación y estados de cuenta con procesos automatizados y seguros.'
+              title='Administración Financiera'
+              description='Controla cuotas de mantenimiento, gastos comunes, facturación y estados de cuenta automatizados.'
+            ></FeatureCard>
+
+            <FeatureCard
+              icon={
+                <svg
+                  className='h-6 w-6 text-amber-600'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                  xmlns='http://www.w3.org/2000/svg'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='2'
+                    d='M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z'
+                  ></path>
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='2'
+                    d='M15 12a3 3 0 11-6 0 3 3 0 016 0z'
+                  ></path>
+                </svg>
+              }
+              title='Mantenimiento y Servicios'
+              description='Programa mantenimiento de áreas comunes, control de proveedores y gestión de servicios.'
             ></FeatureCard>
           </div>
         </div>
       </section>
-      <section id='pricing' className='bg-indigo-25 px-4 py-16'>
+      <section id='pricing' className='bg-amber-25 px-4 py-16'>
         <div className='mx-auto max-w-6xl'>
-          <h2 className='mb-4 text-center text-3xl font-bold text-indigo-800 md:text-4xl'>
-            Planes a medida para tu institución
+          <h2 className='mb-4 text-center text-3xl font-bold text-green-800 md:text-4xl'>
+            Planes a medida para tu condominio
           </h2>
           <p className='mx-auto mb-12 max-w-3xl text-center text-gray-600'>
-            Elige el plan que mejor se adapte a las necesidades de tu colegio. Todos incluyen
+            Elige el plan que mejor se adapte a las necesidades de tu condominio. Todos incluyen
             actualizaciones gratuitas y soporte técnico.
-          </p>
-
-          <div className='flex flex-col justify-center gap-8 md:flex-row'>
-            <PriceCard
-              plan='Básico'
-              price={120}
-              description='Perfecto para pequeñas academias o centros educativos'
-              features={[
-                'Hasta 1000 alumnos',
-                'Gestión académica básica',
-                'Gestión de matriculas',
-                'Comunicación con padres',
-              ]}
-              isPopular={false}
-            />
-            <PriceCard
-              plan='Profesional'
-              price={220}
-              description='Ideal para colegios medianos con necesidades avanzadas'
-              features={[
-                'Hasta 5000 alumnos',
-                'Gestión académica completa',
-                'Sistema de pagos integrado',
-                'Reportes avanzados',
-                'Soporte prioritario 24/7',
-              ]}
-              isPopular={true}
-            />
-            <PriceCard
-              plan='Premium'
-              price={390}
-              description='Para grandes instituciones con requerimientos complejos'
-              features={[
-                'Alumnos ilimitados',
-                'Personalización avanzada',
-                'API completa',
-                'Soporte 24/7 dedicado',
-              ]}
-              isPopular={false}
-            />
-          </div>
-
-          <p className='mt-8 text-center text-gray-500'>
-            ¿Necesitas un plan personalizado?{' '}
-            <a href='#contact' className='text-indigo-600 hover:underline'>
-              Contáctanos
-            </a>
           </p>
         </div>
       </section>
       <section id='testimonials' className='bg-white px-4 py-16'>
         <div className='mx-auto max-w-6xl'>
-          <h2 className='mb-12 text-center text-3xl font-bold text-indigo-800 md:text-4xl'>
+          <h2 className='mb-12 text-center text-3xl font-bold text-green-800 md:text-4xl'>
             Lo que dicen nuestros clientes
           </h2>
           <div className='grid grid-cols-1 gap-8 md:grid-cols-3'>
             <TestimonialCard
               name='Carlos Méndez'
-              role='Director, Colegio Santa María'
-              testimonial={`Desde que implementamos ${SYSTEM_NAME}, hemos reducido un 40% el tiempo dedicado a tareas administrativas. La comunicación con los padres es ahora mucho más efectiva.`}
+              role='Administrador, Condominio Las Palmas'
+              testimonial={`Desde que implementamos ${SYSTEM_NAME}, hemos reducido un 50% el tiempo dedicado a tareas administrativas. La comunicación con los residentes es ahora mucho más efectiva.`}
             ></TestimonialCard>
 
             <TestimonialCard
               name='Laura Rodríguez'
-              role='Coordinadora, Instituto Moderno'
-              testimonial='El módulo de calificaciones nos ha permitido generar reportes detallados en minutos en lugar de horas. Los profesores están encantados con la facilidad de uso.'
+              role='Presidente del Comité, Residencial El Bosque'
+              testimonial='El control de gastos y cuotas se ha simplificado enormemente. Los reportes automáticos nos permiten tomar mejores decisiones para nuestra comunidad.'
             ></TestimonialCard>
 
             <TestimonialCard
               name='José González'
-              role='Administrador, Academia Brillante'
-              testimonial='El módulo de pagos se ha simplificado enormemente. Los recordatorios automáticos y la posibilidad de pagos en línea han reducido la morosidad en un 60%.'
+              role='Síndico, Conjunto Residencial Aurora'
+              testimonial='La gestión de mantenimiento es ahora más eficiente. Podemos programar servicios y llevar control de proveedores desde una sola plataforma.'
             ></TestimonialCard>
           </div>
         </div>
       </section>
       {/* CTA Section */}
-      <section className='bg-indigo-600 px-4 py-16 text-white'>
+      <section className='bg-green-600 px-4 py-16 text-white'>
         <div className='mx-auto max-w-4xl text-center'>
           <h2 className='mb-6 text-3xl font-bold md:text-4xl'>
-            ¿Listo para transformar la gestión de tu institución?
+            ¿Listo para transformar la gestión de tu condominio?
           </h2>
           <p className='mb-8 text-lg'>
-            Únete a cientos de instituciones educativas que ya usan {SYSTEM_NAME} para simplificar
-            sus procesos.
+            Únete a cientos de condominios que ya usan {SYSTEM_NAME} para simplificar sus procesos
+            administrativos.
           </p>
           <div className='flex flex-col justify-center gap-4 sm:flex-row'>
             <a
               href='#pricing'
-              className='rounded-lg bg-white px-8 py-3 font-semibold text-indigo-600 shadow transition hover:bg-indigo-50'
+              className='rounded-lg bg-white px-8 py-3 font-semibold text-green-600 shadow transition hover:bg-green-50'
             >
               Comenzar ahora
             </a>
@@ -227,15 +186,15 @@ function LandingPage() {
         </div>
       </section>
       {/* Footer */}
-      <footer className='bg-indigo-800 px-4 py-12 text-white'>
+      <footer className='bg-green-800 px-4 py-12 text-white'>
         <div className='mx-auto grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-4'>
           <div>
             <div className='mb-4 flex items-center'>
-              <img src='/logo.png' alt={`${SYSTEM_NAME} logo`} className='mr-2 h-8 w-auto' />
+              <img src='/images/logo.png' alt={`${SYSTEM_NAME} logo`} className='mr-2 h-8 w-auto' />
               <span className='text-xl font-bold'>{SYSTEM_NAME}</span>
             </div>
-            <p className='text-indigo-200'>
-              La plataforma integral para la gestión educativa del siglo XXI.
+            <p className='text-green-200'>
+              La plataforma integral para la gestión de condominios del siglo XXI.
             </p>
           </div>
 
@@ -243,17 +202,17 @@ function LandingPage() {
             <h4 className='mb-4 font-semibold'>Producto</h4>
             <ul className='space-y-2'>
               <li>
-                <a href='#features' className='text-indigo-200 transition hover:text-white'>
+                <a href='#features' className='text-green-200 transition hover:text-white'>
                   Características
                 </a>
               </li>
               <li>
-                <a href='#pricing' className='text-indigo-200 transition hover:text-white'>
+                <a href='#pricing' className='text-green-200 transition hover:text-white'>
                   Precios
                 </a>
               </li>
               <li>
-                <a href='#testimonials' className='text-indigo-200 transition hover:text-white'>
+                <a href='#testimonials' className='text-green-200 transition hover:text-white'>
                   Casos de éxito
                 </a>
               </li>
@@ -261,7 +220,7 @@ function LandingPage() {
           </div>
         </div>
 
-        <div className='mx-auto mt-8 max-w-6xl border-t border-indigo-700 pt-8 text-center text-indigo-200'>
+        <div className='mx-auto mt-8 max-w-6xl border-t border-green-700 pt-8 text-center text-green-200'>
           <p>
             &copy; {new Date().getFullYear()} {SYSTEM_NAME}. Todos los derechos reservados.
           </p>

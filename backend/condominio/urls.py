@@ -5,6 +5,7 @@ from .views import (
     LoginView,
     LogoutView,
     UserView,
+    ValidateSessionView,
     # admin y/o personal
     CasaView,
     AsignarCasaView,
@@ -29,6 +30,9 @@ urlpatterns = [
     path("v1/login/", LoginView.as_view(), name="login"),
     path("v1/logout/", LogoutView.as_view(), name="logout"),
     path("v1/user/", UserView.as_view(), name="user"),
+    path(
+        "v1/validate-session/", ValidateSessionView.as_view(), name="validate-session"
+    ),
     # admin y/o personal
     path("v1/casa/", CasaView.as_view(), name="casa"),
     path("v1/asignar-casa/", AsignarCasaView.as_view(), name="asignar-casa"),

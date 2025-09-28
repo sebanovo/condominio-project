@@ -91,6 +91,42 @@ class LogoutView(APIView):
         return response
 
 
+class ValidateSessionView(APIView):
+    def get(self, request):
+        """Validar si la sesión (cookie JWT) es válida"""
+        token = request.COOKIES.get("jwt")
+
+        if not token:
+            return Response(
+                {"valid": False, "message": "No hay sesión activa"}, status=401
+            )
+
+        try:
+            # Decodificar el token
+            payload = jwt.decode(token, "secret", algorithms=["HS256"])
+
+            # Buscar el usuario
+            user = Usuario.objects.filter(id=payload["id"]).first()
+            if not user:
+                return Response(
+                    {"valid": False, "message": "Usuario no encontrado"}, status=401
+                )
+
+            # Serializar datos del usuario (sin información sensible)
+            user_data = {
+                "id": user.id,
+                "email": user.email,
+                # Agrega otros campos que necesites en el frontend
+            }
+
+            return Response({"valid": True, "user": user_data})
+
+        except jwt.ExpiredSignatureError:
+            return Response({"valid": False, "message": "Sesión expirada"}, status=401)
+        except jwt.InvalidTokenError:
+            return Response({"valid": False, "message": "Token inválido"}, status=401)
+
+
 class UserView(APIView):
     def get(self, request):
         """
