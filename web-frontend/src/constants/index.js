@@ -1,1 +1,1 @@
-export const SYSTEM_NAME = 'Jesvaw EduSoft';
+export const SYSTEM_NAME = 'CondomiSoft';
