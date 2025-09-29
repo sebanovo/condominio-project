@@ -21,6 +21,9 @@ from .views import (
     VehiculosListView,
     ReservasListView,
     AreasComunesListView,
+    # listar todo
+    UsuariosAllView,
+    ResidentesAllView,
 )
 
 
@@ -48,4 +51,7 @@ urlpatterns = [
     path("v1/vehiculos/", VehiculosListView.as_view(), name="vehiculos"),
     path("v1/reservas/", ReservasListView.as_view(), name="reservas"),
     path("v1/areas-comunes/", AreasComunesListView.as_view(), name="areas-comunes"),
+    # listas sin permisos
+    path("v1/usuarios/", UsuariosAllView.as_view(), name="usuarios"),
+    path("v1/residentes/", ResidentesAllView.as_view(), name="residentes"),
 ]
