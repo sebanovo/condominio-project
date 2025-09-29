@@ -1,8 +1,9 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView, ListAPIView
 from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.models import Group
 
 from .models import (
     Usuario,
@@ -91,6 +92,26 @@ class LogoutView(APIView):
         return response
 
 
+class UserView(APIView):
+    def get(self, request):
+        """
+        Obtener datas del usuario autenticado
+        """
+        token = request.COOKIES.get("jwt")
+
+        if not token:
+            raise AuthenticationFailed("Unauthenticated!")
+
+        try:
+            payload = jwt.decode(token, "secret", algorithms=["HS256"])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed("Unauthenticated!")
+
+        user = Usuario.objects.filter(id=payload["id"]).first()
+        serializer = UsuarioSerializer(user)
+        return Response(serializer.data)
+
+
 class ValidateSessionView(APIView):
     def get(self, request):
         """Validar si la sesión (cookie JWT) es válida"""
@@ -125,26 +146,6 @@ class ValidateSessionView(APIView):
             return Response({"valid": False, "message": "Sesión expirada"}, status=401)
         except jwt.InvalidTokenError:
             return Response({"valid": False, "message": "Token inválido"}, status=401)
-
-
-class UserView(APIView):
-    def get(self, request):
-        """
-        Obtener datas del usuario autenticado
-        """
-        token = request.COOKIES.get("jwt")
-
-        if not token:
-            raise AuthenticationFailed("Unauthenticated!")
-
-        try:
-            payload = jwt.decode(token, "secret", algorithms=["HS256"])
-        except jwt.ExpiredSignatureError:
-            raise AuthenticationFailed("Unauthenticated!")
-
-        user = Usuario.objects.filter(id=payload["id"]).first()
-        serializer = UsuarioSerializer(user)
-        return Response(serializer.data)
 
 
 """
@@ -477,6 +478,35 @@ class AreasComunesListView(APIView):
         areas = AreaComun.objects.all()
         serializer = AreaComunSerializer(areas, many=True)
         return Response(serializer.data)
+
+
+# METODO PARA LISTAR TODO
+class UsuariosAllView(ListAPIView):
+    queryset = Usuario.objects.filter()
+    serializer_class = UsuarioSerializer
+
+
+class ResidentesAllView(ListCreateAPIView):
+    serializer_class = UsuarioSerializer
+
+    def get_queryset(self):
+        role_group = Group.objects.get(name="Residente")
+        return Usuario.objects.filter(groups=role_group)
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        # Guardar el nuevo usuario
+        self.perform_create(serializer)
+
+        # Asignar grupo "Residente"
+        residente_group = Group.objects.get(name="Residente")
+        usuario = serializer.instance
+        usuario.groups.add(residente_group)
+
+        headers = self.get_success_headers(serializer.data)
+        return Response({"message": "succes"})
 
 
 # admin

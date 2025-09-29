@@ -5,15 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import { server } from '../utils/server';
 import {
   DashboardContent,
-  LevelsContent,
-  PeriodsContent,
-  GradesContent,
-  SectionsContent,
-  SubjectsContent,
-  PersonsContent,
-  StudentsContent,
-  EnrollmentsContent,
-  // ReportsContent,
+  CasasContent,
+  VehiculosContent,
+  AreasComunesContent,
+  ReservasContent,
+  MultasContent,
+  ResidentesContent,
+  // IngresosSalidasContent,
+  // ExtranjerosContent,
 } from './content';
 
 export default function PanelAdminPage() {
@@ -33,24 +32,22 @@ export default function PanelAdminPage() {
     switch (activeSection) {
       case 'dashboard':
         return <DashboardContent />;
-      case 'levels':
-        return <LevelsContent />;
-      case 'periods':
-        return <PeriodsContent />;
-      case 'grades':
-        return <GradesContent />;
-      case 'sections':
-        return <SectionsContent />;
-      case 'subjects':
-        return <SubjectsContent />;
-      case 'persons':
-        return <PersonsContent />;
-      case 'students':
-        return <StudentsContent />;
-      case 'enrollments':
-        return <EnrollmentsContent />;
-      // case 'reports':
-      //   return <ReportsContent />;
+      case 'casas':
+        return <CasasContent />;
+      case 'vehiculos':
+        return <VehiculosContent />;
+      case 'areas-comunes':
+        return <AreasComunesContent />;
+      case 'reservas':
+        return <ReservasContent />;
+      case 'multas':
+        return <MultasContent />;
+      case 'residentes':
+        return <ResidentesContent />;
+      // case 'ingresos-salidas':
+      //   return <IngresosSalidasContent />;
+      // case 'extranjeros':
+      //   return <ExtranjerosContent />;
       default:
         return <DashboardContent />;
     }
@@ -65,11 +62,11 @@ export default function PanelAdminPage() {
             <h1 className='text-2xl font-semibold text-gray-900'>
               Panel de Administración - {SYSTEM_NAME}
             </h1>
-            <div className='flex items-center'>
-              <span className='mr-4 text-gray-700'>Bienvenido, Admin</span>
+            <div className='flex items-center space-x-4'>
+              <span className='text-gray-700'>Bienvenido, Admin</span>
               <button
                 onClick={handleLogOut}
-                className='rounded-lg bg-indigo-600 px-4 py-2 text-white transition hover:bg-indigo-700'
+                className='rounded-lg bg-green-600 px-4 py-2 text-white transition hover:bg-green-700'
               >
                 Cerrar sesión
               </button>

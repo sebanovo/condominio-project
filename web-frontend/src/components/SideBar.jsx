@@ -3,9 +3,9 @@ import { SYSTEM_NAME } from '../constants/index';
 
 function Sidebar({ activeSection, setActiveSection }) {
   const [openSections, setOpenSections] = useState({
-    academics: true,
-    people: false,
-    management: false,
+    propiedades: true,
+    servicios: false,
+    seguridad: false,
   });
 
   const toggleSection = (section) => {
@@ -22,33 +22,40 @@ function Sidebar({ activeSection, setActiveSection }) {
       icon: '📊',
     },
     {
-      id: 'academics',
-      name: 'Gestión Académica',
-      icon: '🎓',
+      id: 'propiedades',
+      name: 'Gestión de Propiedades',
+      icon: '🏠',
       children: [
-        { id: 'levels', name: 'Niveles Educativos' },
-        { id: 'periods', name: 'Períodos Académicos' },
-        { id: 'grades', name: 'Grados' },
-        { id: 'sections', name: 'Secciones' },
-        { id: 'subjects', name: 'Materias' },
+        { id: 'casas', name: 'Casas/Departamentos' },
+        { id: 'vehiculos', name: 'Vehículos' },
+        { id: 'residentes', name: 'Residentes' },
       ],
     },
     {
-      id: 'people',
-      name: 'Gestión de Personas',
-      icon: '👥',
+      id: 'servicios',
+      name: 'Servicios Comunes',
+      icon: '🏊',
       children: [
-        { id: 'persons', name: 'Personas' },
-        { id: 'students', name: 'Estudiantes' },
-        { id: 'enrollments', name: 'Matrículas' },
+        { id: 'areas-comunes', name: 'Áreas Comunes' },
+        { id: 'reservas', name: 'Reservas' },
+        { id: 'multas', name: 'Multas' },
+      ],
+    },
+    {
+      id: 'seguridad',
+      name: 'Control de Acceso',
+      icon: '🔒',
+      children: [
+        { id: 'ingresos-salidas', name: 'Ingresos y Salidas' },
+        { id: 'extranjeros', name: 'Visitantes Extranjeros' },
       ],
     },
   ];
 
   return (
-    <div className='flex w-64 flex-col bg-indigo-800 text-white'>
+    <div className='flex w-64 flex-col bg-green-800 text-white'>
       <div className='flex items-center p-4'>
-        <span className='text-xl font-bold'>🎯 {SYSTEM_NAME}</span>
+        <span className='text-xl font-bold'>🏢 {SYSTEM_NAME}</span>
       </div>
 
       <nav className='flex-1 overflow-y-auto pt-2'>
@@ -59,8 +66,8 @@ function Sidebar({ activeSection, setActiveSection }) {
                 <>
                   <button
                     onClick={() => toggleSection(item.id)}
-                    className={`flex w-full items-center justify-between rounded-lg p-3 transition hover:bg-indigo-700 ${
-                      openSections[item.id] ? 'bg-indigo-700' : ''
+                    className={`flex w-full items-center justify-between rounded-lg p-3 transition hover:bg-green-700 ${
+                      openSections[item.id] ? 'bg-green-700' : ''
                     }`}
                   >
                     <div className='flex items-center'>
@@ -80,8 +87,8 @@ function Sidebar({ activeSection, setActiveSection }) {
                         <li key={child.id}>
                           <button
                             onClick={() => setActiveSection(child.id)}
-                            className={`w-full rounded-lg p-2 pl-8 text-left transition hover:bg-indigo-700 ${
-                              activeSection === child.id ? 'bg-indigo-600' : ''
+                            className={`w-full rounded-lg p-2 pl-8 text-left transition hover:bg-green-700 ${
+                              activeSection === child.id ? 'bg-green-600' : ''
                             }`}
                           >
                             {child.name}
@@ -94,8 +101,8 @@ function Sidebar({ activeSection, setActiveSection }) {
               ) : (
                 <button
                   onClick={() => setActiveSection(item.id)}
-                  className={`flex w-full items-center rounded-lg p-3 transition hover:bg-indigo-700 ${
-                    activeSection === item.id ? 'bg-indigo-600' : ''
+                  className={`flex w-full items-center rounded-lg p-3 transition hover:bg-green-700 ${
+                    activeSection === item.id ? 'bg-green-600' : ''
                   }`}
                 >
                   <span className='mr-3 text-lg'>{item.icon}</span>
