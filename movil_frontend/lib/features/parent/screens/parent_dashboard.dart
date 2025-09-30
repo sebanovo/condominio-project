@@ -30,17 +30,16 @@ class _ParentDashboardState extends State<ParentDashboard> {
       final hijos = await ParentRepository.getChildren(parentId);
 
       if (hijos.isNotEmpty) {
-        final notas =
-            await ParentRepository.getChildrenGrades(parentId);
-        final asistencias =
-            await ParentRepository.getChildrenAttendance(parentId);
+        final notas = await ParentRepository.getChildrenGrades(parentId);
+        final asistencias = await ParentRepository.getChildrenAttendance(
+          parentId,
+        );
         final anuncios = await AnnouncementsRepository.getAnnouncements();
 
         setState(() {
           promedio = _calcularPromedio(notas);
           asistencia = _calcularAsistencia(asistencias);
-          ultimoAnuncio =
-              anuncios.isNotEmpty ? anuncios.first["titulo"] : "";
+          ultimoAnuncio = anuncios.isNotEmpty ? anuncios.first["titulo"] : "";
           cargando = false;
         });
       } else {
@@ -48,9 +47,9 @@ class _ParentDashboardState extends State<ParentDashboard> {
       }
     } catch (e) {
       setState(() => cargando = false);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Error al cargar datos: $e")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Error al cargar datos: $e")));
     }
   }
 
@@ -64,8 +63,9 @@ class _ParentDashboardState extends State<ParentDashboard> {
 
   double _calcularAsistencia(List<dynamic> asistencias) {
     if (asistencias.isEmpty) return 0.0;
-    final presentes =
-        asistencias.where((a) => a["estado"] == "Presente").length;
+    final presentes = asistencias
+        .where((a) => a["estado"] == "Presente")
+        .length;
     return (presentes / asistencias.length) * 100;
   }
 
@@ -73,7 +73,7 @@ class _ParentDashboardState extends State<ParentDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Jesvaw EduSoft"),
+        title: const Text("CondomiSoft"),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
@@ -84,7 +84,7 @@ class _ParentDashboardState extends State<ParentDashboard> {
                 (route) => false,
               );
             },
-          )
+          ),
         ],
       ),
       drawer: Drawer(
@@ -154,7 +154,10 @@ class _ParentDashboardState extends State<ParentDashboard> {
                   Card(
                     color: Colors.green[50],
                     child: ListTile(
-                      leading: const Icon(Icons.fact_check, color: Colors.green),
+                      leading: const Icon(
+                        Icons.fact_check,
+                        color: Colors.green,
+                      ),
                       title: const Text("Asistencia de Hijos"),
                       trailing: Text(
                         "${asistencia.toStringAsFixed(1)}%",
@@ -169,8 +172,7 @@ class _ParentDashboardState extends State<ParentDashboard> {
                   Card(
                     color: Colors.orange[50],
                     child: ListTile(
-                      leading:
-                          const Icon(Icons.campaign, color: Colors.orange),
+                      leading: const Icon(Icons.campaign, color: Colors.orange),
                       title: const Text("Último Anuncio"),
                       subtitle: Text(ultimoAnuncio),
                     ),

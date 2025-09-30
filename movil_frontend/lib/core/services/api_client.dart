@@ -3,7 +3,9 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiClient {
-  static const String baseUrl = "http://localhost:8000/api";
+  static const String baseUrl = "http://54.196.207.31:5173/"; 
+  
+  //   
   //  http://10.0.2.2:8000/api
   //  Android Emulator usa 10.0.2.2
   //  Chrome/Web y Windows usan http://localhost:8000/api
@@ -29,8 +31,7 @@ class ApiClient {
     }
   }
 
-  static Future<dynamic> post(
-      String endpoint, Map<String, dynamic> body) async {
+  static Future<dynamic> post(String endpoint, Map<String, dynamic> body) async {
     final token = await _getToken();
     final response = await http.post(
       Uri.parse("$baseUrl$endpoint"),
@@ -43,8 +44,7 @@ class ApiClient {
     if (response.statusCode == 200 || response.statusCode == 201) {
       return jsonDecode(response.body);
     } else {
-      throw Exception(
-          "Error POST $endpoint: ${response.statusCode} - ${response.body}");
+      throw Exception("Error POST $endpoint: ${response.statusCode} - ${response.body}");
     }
   }
 }
