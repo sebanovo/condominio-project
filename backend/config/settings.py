@@ -105,7 +105,7 @@ REST_FRAMEWORK = {
 }
 
 SPECTACULAR_SETTINGS = {
-    "TITLE": "SGAC SaaS API",
+    "TITLE": "CONDOMINIO SYSTEM 🏨",
     "VERSION": "0.1",
 }
 
@@ -180,4 +180,3 @@ CSRF_TRUSTED_ORIGINS = env.list(
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
