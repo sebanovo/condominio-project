@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../../routes/app_routes.dart';
 import '../../../data/repositories/auth_repository.dart';
 
-
 class SignInPage2 extends StatelessWidget {
   const SignInPage2({super.key});
 
@@ -43,24 +42,20 @@ class _Logo extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         // Aquí cambiamos el logo de Flutter por tu logo
-        Image.asset(
-          "assets/images/logo.png",
-          width: isSmallScreen ? 100 : 200,
-        ),
+        Image.asset("assets/images/logo.png", width: isSmallScreen ? 100 : 200),
         const SizedBox(height: 16),
         Text(
-          "Jesvaw EduSoft",
+          "CondomiSoft",
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Colors.blue[700],
-              ),
+            fontWeight: FontWeight.bold,
+            color: Colors.blue[700],
+          ),
         ),
       ],
     );
   }
 }
-
 
 class _FormContent extends StatefulWidget {
   const _FormContent();
@@ -172,17 +167,25 @@ class __FormContentState extends State<_FormContent> {
                         final role = await AuthRepository.getRole();
 
                         if (role == "student") {
-                          Navigator.pushReplacementNamed(context, AppRoutes.studentDashboard);
+                          Navigator.pushReplacementNamed(
+                            context,
+                            AppRoutes.studentDashboard,
+                          );
                         } else if (role == "parent") {
-                          Navigator.pushReplacementNamed(context, AppRoutes.parentDashboard);
+                          Navigator.pushReplacementNamed(
+                            context,
+                            AppRoutes.parentDashboard,
+                          );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text("Rol no reconocido")),
                           );
                         }
-                      } else {  
+                      } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("Credenciales inválidas")),
+                          const SnackBar(
+                            content: Text("Credenciales inválidas"),
+                          ),
                         );
                       }
                     } catch (e) {
@@ -190,7 +193,7 @@ class __FormContentState extends State<_FormContent> {
                         SnackBar(content: Text("Error al conectar: $e")),
                       );
                     }
-                  } 
+                  }
                 },
               ),
             ),

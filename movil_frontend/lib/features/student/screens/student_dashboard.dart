@@ -40,9 +40,9 @@ class _StudentDashboardState extends State<StudentDashboard> {
       });
     } catch (e) {
       setState(() => cargando = false);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Error al cargar datos: $e")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Error al cargar datos: $e")));
     }
   }
 
@@ -56,8 +56,9 @@ class _StudentDashboardState extends State<StudentDashboard> {
 
   double _calcularAsistencia(List<dynamic> asistencias) {
     if (asistencias.isEmpty) return 0.0;
-    final presentes =
-        asistencias.where((a) => a["estado"] == "Presente").length;
+    final presentes = asistencias
+        .where((a) => a["estado"] == "Presente")
+        .length;
     return (presentes / asistencias.length) * 100;
   }
 
@@ -65,7 +66,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Jesvaw EduSoft"),
+        title: const Text("CondomiSoft"),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
@@ -76,7 +77,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
                 (route) => false,
               );
             },
-          )
+          ),
         ],
       ),
       drawer: Drawer(
@@ -153,7 +154,10 @@ class _StudentDashboardState extends State<StudentDashboard> {
                   Card(
                     color: Colors.green[50],
                     child: ListTile(
-                      leading: const Icon(Icons.fact_check, color: Colors.green),
+                      leading: const Icon(
+                        Icons.fact_check,
+                        color: Colors.green,
+                      ),
                       title: const Text("Asistencia"),
                       trailing: Text(
                         "${asistencia.toStringAsFixed(1)}%",
@@ -168,8 +172,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
                   Card(
                     color: Colors.orange[50],
                     child: ListTile(
-                      leading:
-                          const Icon(Icons.campaign, color: Colors.orange),
+                      leading: const Icon(Icons.campaign, color: Colors.orange),
                       title: const Text("Último Anuncio"),
                       subtitle: Text(ultimoAnuncio),
                     ),

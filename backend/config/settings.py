@@ -24,7 +24,7 @@ environ.Env.read_env(BASE_DIR.parent / ".env")
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("SECRET_KEY", default="insecure-dev-only")
+SECRET_KEY = env("SECRET_KEY", default="secret")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DEBUG", default=True)
@@ -105,7 +105,7 @@ REST_FRAMEWORK = {
 }
 
 SPECTACULAR_SETTINGS = {
-    "TITLE": "SGAC SaaS API",
+    "TITLE": "CONDOMINIO SYSTEM 🏨",
     "VERSION": "0.1",
 }
 
@@ -180,4 +180,3 @@ CSRF_TRUSTED_ORIGINS = env.list(
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
