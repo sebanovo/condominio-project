@@ -511,14 +511,6 @@ class ResidentesAllView(ListCreateAPIView):
         return Response({"message": "succes"})
 
 
-class Nose(ListAPIView):
-    def get_queryset(self):
-        role_group = Group.objects.get(name="Residente")
-        return Usuario.objects.filter(groups=role_group)
-
-    serializer_class = [UsuarioSerializer]
-
-
 # admin
 # asignar casa a usuario ✔
 # asignar multa a usuario ✔
