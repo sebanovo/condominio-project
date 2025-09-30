@@ -2,8 +2,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.generics import ListCreateAPIView, ListAPIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.contrib.auth.models import Group
+from config import settings
 
 from .models import (
     Usuario,
@@ -15,6 +16,7 @@ from .models import (
     IngresoSalida,
     Extranjero,
 )
+
 from .serializers import (
     UsuarioSerializer,
     CasaSerializer,
@@ -36,8 +38,6 @@ import jwt
 #####################################
 """
 
-SECRET_KEY = "secret"
-
 
 class SignUpView(APIView):
     def post(self, request):
@@ -51,7 +51,7 @@ class SignUpView(APIView):
             "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
         }
 
-        token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
+        token = jwt.encode(payload, settings.SECRET_KEY, algorithm="HS256")
         response = Response()
         response.set_cookie(key="jwt", value=token, httponly=True)
         response.data = serializer.data
@@ -76,7 +76,7 @@ class LoginView(APIView):
             "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
         }
 
-        token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
+        token = jwt.encode(payload, settings.SECRET_KEY, algorithm="HS256")
         response = Response()
         response.set_cookie(key="jwt", value=token, httponly=True)
         response.data = {"message": "success"}
@@ -105,7 +105,7 @@ class UserView(APIView):
             raise AuthenticationFailed("Unauthenticated!")
 
         try:
-            payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+            payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed("Unauthenticated!")
 
@@ -126,7 +126,7 @@ class ValidateSessionView(APIView):
 
         try:
             # Decodificar el token
-            payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+            payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
 
             # Buscar el usuario
             user = Usuario.objects.filter(id=payload["id"]).first()
@@ -165,7 +165,7 @@ class CasaView(APIView):
         if not token:
             raise AuthenticationFailed("Unauthenticated!")
         try:
-            payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+            payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed("Unauthenticated!")
         user = Usuario.objects.filter(id=payload["id"]).first()
@@ -193,7 +193,7 @@ class AsignarCasaView(APIView):
         if not token:
             raise AuthenticationFailed("Unauthenticated!")
         try:
-            payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+            payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed("Unauthenticated!")
         user = Usuario.objects.filter(id=payload["id"]).first()
@@ -218,7 +218,7 @@ class MultaView(APIView):
         if not token:
             raise AuthenticationFailed("Unauthenticated!")
         try:
-            payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+            payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed("Unauthenticated!")
         user = Usuario.objects.filter(id=payload["id"]).first()
@@ -247,7 +247,7 @@ class IngresoSalidaView(APIView):
         if not token:
             raise AuthenticationFailed("Unauthenticated!")
         try:
-            payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+            payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed("Unauthenticated!")
         user = Usuario.objects.filter(id=payload["id"]).first()
@@ -290,7 +290,7 @@ class VehiculoView(APIView):
             raise AuthenticationFailed("Unauthenticated!")
 
         try:
-            payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+            payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed("Unauthenticated!")
 
@@ -318,7 +318,7 @@ class ReservaView(APIView):
         if not token:
             raise AuthenticationFailed("Unauthenticated!")
         try:
-            payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+            payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed("Unauthenticated!")
         user = Usuario.objects.filter(id=payload["id"]).first()
@@ -350,7 +350,7 @@ class AreaComunView(APIView):
         if not token:
             raise AuthenticationFailed("Unauthenticated!")
         try:
-            payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+            payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed("Unauthenticated!")
         user = Usuario.objects.filter(id=payload["id"]).first()
@@ -381,7 +381,7 @@ class ExtranjeroView(APIView):
             raise AuthenticationFailed("Unauthenticated!")
 
         try:
-            payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+            payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed("Unauthenticated!")
 
@@ -414,7 +414,7 @@ class CasasListView(APIView):
         serializer = CasaSerializer(casas, many=True)
         token = request.COOKIES.get("jwt")
         try:
-            payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+            payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed("Unauthenticated!")
 
@@ -430,7 +430,7 @@ class MultasListView(APIView):
         serializer = MultaSerializer(multas, many=True)
         token = request.COOKIES.get("jwt")
         try:
-            payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+            payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed("Unauthenticated!")
 
@@ -447,7 +447,7 @@ class VehiculosListView(APIView):
         serializer = VehiculoSerializer(vehiculos, many=True)
         token = request.COOKIES.get("jwt")
         try:
-            payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+            payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed("Unauthenticated!")
 
@@ -464,7 +464,7 @@ class ReservasListView(APIView):
         serializer = ReservaSerializer(reservas, many=True)
         token = request.COOKIES.get("jwt")
         try:
-            payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+            payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed("Unauthenticated!")
 
@@ -509,6 +509,14 @@ class ResidentesAllView(ListCreateAPIView):
 
         headers = self.get_success_headers(serializer.data)
         return Response({"message": "succes"})
+
+
+class Nose(ListAPIView):
+    def get_queryset(self):
+        role_group = Group.objects.get(name="Residente")
+        return Usuario.objects.filter(groups=role_group)
+
+    serializer_class = [UsuarioSerializer]
 
 
 # admin
