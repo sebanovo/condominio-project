@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'app.dart';
+import 'app_router.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,6 +10,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const App();
+    return MaterialApp.router(
+      title: 'CondoSmart',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      routerConfig: appRouter,
+    );
   }
 }
+  
