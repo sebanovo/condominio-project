@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { SYSTEM_NAME } from '../constants/index';
+import Icon from './Icon';
 
 function Sidebar({ activeSection, setActiveSection }) {
   const [openSections, setOpenSections] = useState({
@@ -19,43 +20,44 @@ function Sidebar({ activeSection, setActiveSection }) {
     {
       id: 'dashboard',
       name: 'Dashboard',
-      icon: '📊',
+      icon: <Icon name='dashboard' />,
     },
     {
       id: 'propiedades',
       name: 'Gestión de Propiedades',
-      icon: '🏠',
+      icon: <Icon name='dashboard' />,
       children: [
-        { id: 'casas', name: 'Casas/Departamentos' },
-        { id: 'vehiculos', name: 'Vehículos' },
-        { id: 'residentes', name: 'Residentes' },
+        { id: 'casas', name: 'Casas', icon: <Icon name='house' /> },
+        { id: 'vehiculos', name: 'Vehículos', icon: <Icon name='vehicule' /> },
+        { id: 'residentes', name: 'Residentes', icon: <Icon name='resident' /> },
       ],
     },
     {
       id: 'servicios',
       name: 'Servicios Comunes',
-      icon: '🏊',
+      icon: <Icon name='dashboard' />,
       children: [
-        { id: 'areas-comunes', name: 'Áreas Comunes' },
-        { id: 'reservas', name: 'Reservas' },
-        { id: 'multas', name: 'Multas' },
+        { id: 'areas-comunes', name: 'Áreas Comunes', icon: <Icon name='swimming' /> },
+        { id: 'reservas', name: 'Reservas', icon: <Icon name='calendar' /> },
+        { id: 'multas', name: 'Multas', icon: <Icon name='fines' /> },
       ],
     },
     {
       id: 'seguridad',
       name: 'Control de Acceso',
-      icon: '🔒',
+      icon: <Icon name='dashboard' />,
       children: [
-        { id: 'ingresos-salidas', name: 'Ingresos y Salidas' },
-        { id: 'extranjeros', name: 'Visitantes Extranjeros' },
+        { id: 'ingresos-salidas', name: 'Ingresos y Salidas', icon: <Icon name='accesible' /> },
+        { id: 'extranjeros', name: 'Visitantes Extranjeros', icon: <Icon name='foraigner' /> },
       ],
     },
   ];
 
   return (
     <div className='flex w-64 flex-col bg-green-800 text-white'>
-      <div className='flex items-center p-4'>
-        <span className='text-xl font-bold'>🏢 {SYSTEM_NAME}</span>
+      <div className='flex items-center gap-2 p-4'>
+        <img className='w-12 rounded-2xl' src='images/logo.png'></img>
+        <span className='text-xl font-bold'>{SYSTEM_NAME}</span>
       </div>
 
       <nav className='flex-1 overflow-y-auto pt-2'>
@@ -71,7 +73,9 @@ function Sidebar({ activeSection, setActiveSection }) {
                     }`}
                   >
                     <div className='flex items-center'>
-                      <span className='mr-3 text-lg'>{item.icon}</span>
+                      <span className='mr-3 flex h-5 w-5 items-center justify-center'>
+                        {item.icon}
+                      </span>
                       <span>{item.name}</span>
                     </div>
                     <span
@@ -87,10 +91,13 @@ function Sidebar({ activeSection, setActiveSection }) {
                         <li key={child.id}>
                           <button
                             onClick={() => setActiveSection(child.id)}
-                            className={`w-full rounded-lg p-2 pl-8 text-left transition hover:bg-green-700 ${
+                            className={`flex w-full items-center rounded-lg p-2 pl-8 text-left transition hover:bg-green-700 ${
                               activeSection === child.id ? 'bg-green-600' : ''
                             }`}
                           >
+                            <span className='mr-3 flex h-4 w-4 items-center justify-center opacity-75'>
+                              {child.icon}
+                            </span>
                             {child.name}
                           </button>
                         </li>
@@ -105,7 +112,7 @@ function Sidebar({ activeSection, setActiveSection }) {
                     activeSection === item.id ? 'bg-green-600' : ''
                   }`}
                 >
-                  <span className='mr-3 text-lg'>{item.icon}</span>
+                  <span className='mr-3 flex h-5 w-5 items-center justify-center'>{item.icon}</span>
                   <span>{item.name}</span>
                 </button>
               )}
