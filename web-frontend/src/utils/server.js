@@ -334,4 +334,87 @@ export const server = () => ({
 
     return response.json();
   },
+  // roles y permisos
+  getGroups: async () => {
+    const response = await fetch('/api/v1/groups/', {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return response.json();
+  },
+
+  getPermissions: async () => {
+    const response = await fetch('/api/v1/permissions/', {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return response.json();
+  },
+
+  assignUserGroups: async (userId, groupIds) => {
+    const response = await fetch(`/api/v1/users/${userId}/groups/`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ group_ids: groupIds }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return response.json();
+  },
+
+  createGroup: async (name) => {
+    const response = await fetch('/api/v1/groups/create/', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return response.json();
+  },
+
+  assignGroupPermissions: async (groupId, permissionIds) => {
+    const response = await fetch(`/api/v1/groups/${groupId}/permissions/`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ permission_ids: permissionIds }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return response.json();
+  },
 });

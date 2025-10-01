@@ -13,6 +13,8 @@ import {
   ResidentesContent,
   IngresosSalidasContent,
   ExtranjerosContent,
+  // Roles y permisos
+  RolesContent,
 } from './content';
 
 export default function PanelAdminPage() {
@@ -48,6 +50,8 @@ export default function PanelAdminPage() {
         return <IngresosSalidasContent />;
       case 'extranjeros':
         return <ExtranjerosContent />;
+      case 'roles':
+        return <RolesContent />;
       default:
         return <DashboardContent />;
     }
