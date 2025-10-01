@@ -11,8 +11,8 @@ import {
   ReservasContent,
   MultasContent,
   ResidentesContent,
-  // IngresosSalidasContent,
-  // ExtranjerosContent,
+  IngresosSalidasContent,
+  ExtranjerosContent,
 } from './content';
 
 export default function PanelAdminPage() {
@@ -44,10 +44,10 @@ export default function PanelAdminPage() {
         return <MultasContent />;
       case 'residentes':
         return <ResidentesContent />;
-      // case 'ingresos-salidas':
-      //   return <IngresosSalidasContent />;
-      // case 'extranjeros':
-      //   return <ExtranjerosContent />;
+      case 'ingresos-salidas':
+        return <IngresosSalidasContent />;
+      case 'extranjeros':
+        return <ExtranjerosContent />;
       default:
         return <DashboardContent />;
     }

@@ -251,6 +251,11 @@ class MultaView(APIView):
 
 
 class IngresoSalidaView(APIView):
+    def get(self, request):
+        ingreso_salida = IngresoSalida.objects.all()
+        serializer = IngresoSalidaSerializer(ingreso_salida, many=True)
+        return Response(serializer.data)
+
     def post(self, request):
         """Crear ingreso/salida a usuario (solo Administrador y Personal, puede hacerlo)"""
         token = request.COOKIES.get("jwt")
@@ -395,6 +400,11 @@ class AreaComunView(APIView):
 
 
 class ExtranjeroView(APIView):
+    def get(self, request):
+        extranjeros = Extranjero.objects.all()
+        serializer = ExtranjeroSerializer(extranjeros, many=True)
+        return Response(serializer.data)
+
     def post(self, request):
         """Crear extranjero (solo admin y personal, puede hacerlo)"""
         token = request.COOKIES.get("jwt")
