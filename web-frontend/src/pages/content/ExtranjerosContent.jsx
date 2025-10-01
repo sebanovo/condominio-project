@@ -62,11 +62,6 @@ export default function ExtranjerosContent() {
     }));
   };
 
-  const getVisitasCount = (extranjeroId) => {
-    // Esto debería venir del backend, por ahora es un ejemplo
-    return Math.floor(Math.random() * 10); // Simulación
-  };
-
   return (
     <div className='space-y-6'>
       <div className='flex items-center justify-between'>
@@ -142,50 +137,15 @@ export default function ExtranjerosContent() {
         </div>
       )}
 
-      {/* Estadísticas rápidas */}
-      <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
-        <div className='rounded-lg bg-white p-4 shadow'>
-          <div className='flex items-center'>
-            <div className='rounded-full bg-green-100 p-3'>
-              <span className='text-xl text-green-600'>🌎</span>
-            </div>
-            <div className='ml-4'>
-              <p className='text-sm text-gray-600'>Total Extranjeros</p>
-              <p className='text-2xl font-bold'>{extranjeros.length}</p>
-            </div>
+      {/* Estadística simple */}
+      <div className='rounded-lg bg-white p-4 shadow'>
+        <div className='flex items-center'>
+          <div className='rounded-full bg-green-100 p-3'>
+            <span className='text-xl text-green-600'>🌎</span>
           </div>
-        </div>
-
-        <div className='rounded-lg bg-white p-4 shadow'>
-          <div className='flex items-center'>
-            <div className='rounded-full bg-blue-100 p-3'>
-              <span className='text-xl text-blue-600'>📅</span>
-            </div>
-            <div className='ml-4'>
-              <p className='text-sm text-gray-600'>Visitas Totales</p>
-              <p className='text-2xl font-bold'>
-                {extranjeros.reduce((total, ext) => total + getVisitasCount(ext.id), 0)}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className='rounded-lg bg-white p-4 shadow'>
-          <div className='flex items-center'>
-            <div className='rounded-full bg-purple-100 p-3'>
-              <span className='text-xl text-purple-600'>👤</span>
-            </div>
-            <div className='ml-4'>
-              <p className='text-sm text-gray-600'>Promedio Visitas</p>
-              <p className='text-2xl font-bold'>
-                {extranjeros.length > 0
-                  ? (
-                      extranjeros.reduce((total, ext) => total + getVisitasCount(ext.id), 0) /
-                      extranjeros.length
-                    ).toFixed(1)
-                  : '0'}
-              </p>
-            </div>
+          <div className='ml-4'>
+            <p className='text-sm text-gray-600'>Total de Visitantes Extranjeros Registrados</p>
+            <p className='text-2xl font-bold'>{extranjeros.length}</p>
           </div>
         </div>
       </div>
@@ -214,13 +174,7 @@ export default function ExtranjerosContent() {
                     CI/Pasaporte
                   </th>
                   <th className='px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase'>
-                    Nombre
-                  </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase'>
-                    Visitas
-                  </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase'>
-                    Última Visita
+                    Nombre Completo
                   </th>
                 </tr>
               </thead>
@@ -235,57 +189,12 @@ export default function ExtranjerosContent() {
                     <td className='px-6 py-4'>
                       <div className='text-sm font-semibold text-gray-900'>{extranjero.nombre}</div>
                     </td>
-                    <td className='px-6 py-4 whitespace-nowrap'>
-                      <div className='text-sm text-gray-900'>
-                        <span className='inline-flex items-center rounded-full bg-blue-100 px-2 py-1 text-xs font-medium text-blue-800'>
-                          {getVisitasCount(extranjero.id)} visitas
-                        </span>
-                      </div>
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap'>
-                      <div className='text-sm text-gray-500'>
-                        {extranjero.ultima_visita || 'No registrada'}
-                      </div>
-                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         )}
-      </div>
-
-      {/* Información adicional */}
-      <div className='rounded-lg bg-white p-6 shadow'>
-        <h3 className='mb-4 text-lg font-semibold'>Información de Visitantes</h3>
-        <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
-          <div>
-            <h4 className='mb-2 font-medium text-gray-900'>Visitantes Frecuentes</h4>
-            <div className='space-y-2'>
-              {extranjeros.slice(0, 3).map((extranjero) => (
-                <div key={extranjero.id} className='flex items-center justify-between text-sm'>
-                  <span>{extranjero.nombre}</span>
-                  <span className='text-gray-500'>{getVisitasCount(extranjero.id)} visitas</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div>
-            <h4 className='mb-2 font-medium text-gray-900'>Estadísticas</h4>
-            <div className='space-y-2 text-sm'>
-              <div className='flex justify-between'>
-                <span>Total registrados:</span>
-                <span className='font-semibold'>{extranjeros.length}</span>
-              </div>
-              <div className='flex justify-between'>
-                <span>Visitantes activos:</span>
-                <span className='font-semibold'>
-                  {extranjeros.filter((ext) => getVisitasCount(ext.id) > 0).length}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
