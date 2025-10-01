@@ -158,6 +158,11 @@ class ValidateSessionView(APIView):
 
 
 class CasaView(APIView):
+    def get(self, request):
+        casas = Casa.objects.all()
+        serializer = CasaSerializer(casas, many=True)
+        return Response(serializer.data)
+
     def post(self, request):
         """Crear casa (solo admin y personal, puede hacerlo)"""
         token = request.COOKIES.get("jwt")
@@ -211,6 +216,11 @@ class AsignarCasaView(APIView):
 
 
 class MultaView(APIView):
+    def get(self, request):
+        multas = Multa.objects.all()
+        serializer = MultaSerializer(multas, many=True)
+        return Response(serializer.data)
+
     def post(self, request):
         """Crear multa (solo admin y personal, puede hacerlo)"""
         token = request.COOKIES.get("jwt")
@@ -282,6 +292,13 @@ class IngresoSalidaView(APIView):
 
 
 class VehiculoView(APIView):
+    def get(self, request):
+        vehiculos = Vehiculo.objects.all()
+        serializer = VehiculoSerializer(vehiculos, many=True)
+        return Response(serializer.data)
+
+        pass
+
     def post(self, request):
         """Crear vehiculo (solo admin y personal, puede hacerlo)"""
         token = request.COOKIES.get("jwt")
@@ -312,6 +329,11 @@ class VehiculoView(APIView):
 
 
 class ReservaView(APIView):
+    def get(self, request):
+        reservas = Reserva.objects.all()
+        serializer = ReservaSerializer(reservas, many=True)
+        return Response(serializer.data)
+
     def post(self, request):
         """Asignar reserva a usuario (solo Admin y Personal, puede hacerlo)"""
         token = request.COOKIES.get("jwt")

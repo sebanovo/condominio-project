@@ -62,7 +62,7 @@ export const server = () => ({
     return response.json();
   },
   getCasas: async () => {
-    const response = await fetch('/api/v1/casas/', {
+    const response = await fetch('/api/v1/casa/', {
       method: 'GET',
       credentials: 'include',
       headers: {
@@ -95,7 +95,7 @@ export const server = () => ({
   },
 
   getVehiculos: async () => {
-    const response = await fetch('/api/v1/vehiculos/', {
+    const response = await fetch('/api/v1/vehiculo/', {
       method: 'GET',
       credentials: 'include',
       headers: {
@@ -176,7 +176,7 @@ export const server = () => ({
     return response.json();
   },
   getReservas: async () => {
-    const response = await fetch('/api/v1/reservas/', {
+    const response = await fetch('/api/v1/reserva/', {
       method: 'GET',
       credentials: 'include',
       headers: {
@@ -208,7 +208,7 @@ export const server = () => ({
     return response.json();
   },
   getMultas: async () => {
-    const response = await fetch('/api/v1/multas/', {
+    const response = await fetch('/api/v1/multa/', {
       method: 'GET',
       credentials: 'include',
       headers: {
