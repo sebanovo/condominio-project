@@ -247,49 +247,6 @@ export default function AreasComunesContent() {
         )}
       </div>
 
-      {/* Vista en tarjetas (alternativa) */}
-      <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
-        {areas.map((area) => (
-          <div
-            key={area.id}
-            className='overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md'
-          >
-            <div className='p-6'>
-              <div className='mb-4 flex items-center'>
-                <h3 className='text-lg font-semibold text-gray-900'>{area.nombre}</h3>
-              </div>
-
-              <p className='mb-4 line-clamp-3 text-sm text-gray-600'>{area.descripcion}</p>
-
-              <div className='space-y-2'>
-                <div className='flex items-center justify-between'>
-                  <span className='text-sm text-gray-500'>Horario:</span>
-                  <span className='text-sm font-medium'>{area.horario}</span>
-                </div>
-
-                <div className='flex items-center justify-between'>
-                  <span className='text-sm text-gray-500'>Costo:</span>
-                  <span className='text-sm font-semibold text-green-600'>
-                    {formatCosto(area.costo)}
-                  </span>
-                </div>
-
-                <div className='flex items-center justify-between'>
-                  <span className='text-sm text-gray-500'>Reservas:</span>
-                  <span className='text-sm font-medium'>{area.reservas_count || 0}</span>
-                </div>
-              </div>
-
-              <div className='mt-4 border-t border-gray-200 pt-4'>
-                <button className='w-full rounded bg-green-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-green-700'>
-                  Ver Reservas
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
       {/* Estadísticas rápidas */}
       <div className='grid grid-cols-1 gap-4 md:grid-cols-4'>
         <div className='rounded-lg bg-white p-4 shadow'>

@@ -23,6 +23,12 @@ function Sidebar({ activeSection, setActiveSection }) {
       icon: <Icon name='dashboard' />,
     },
     {
+      id: 'administracion',
+      name: 'Administración',
+      icon: <Icon name='admin' />,
+      children: [{ id: 'roles', name: 'Roles y Permisos', icon: <Icon name='roles' /> }],
+    },
+    {
       id: 'propiedades',
       name: 'Gestión de Propiedades',
       icon: <Icon name='dashboard' />,

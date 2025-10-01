@@ -3,7 +3,6 @@ from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.generics import ListCreateAPIView, ListAPIView
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from django.contrib.auth.models import Group
 from config import settings
 
 from .models import (
@@ -26,11 +25,141 @@ from .serializers import (
     MultaSerializer,
     IngresoSalidaSerializer,
     ExtranjeroSerializer,
+    # roles y permisos
 )
 
 import datetime
 from .serializers import UsuarioSerializer
 import jwt
+
+from django.contrib.auth.models import Group, Permission
+from django.contrib.contenttypes.models import ContentType
+from rest_framework.decorators import api_view
+from rest_framework.views import APIView
+from rest_framework import status
+from .serializers import UsuarioSerializer, GroupSerializer, PermissionSerializer
+
+"""
+####################
+# ROLES Y PERMISOS #
+####################
+"""
+
+
+class GroupsListView(APIView):
+    """Listar todos los grupos (roles) disponibles"""
+
+    def get(self, request):
+        groups = Group.objects.all()
+        serializer = GroupSerializer(groups, many=True)
+        return Response(serializer.data)
+
+
+class UserGroupsView(APIView):
+    """Obtener y asignar grupos a un usuario"""
+
+    def get(self, request, user_id):
+        try:
+            user = Usuario.objects.get(id=user_id)
+            groups = user.groups.all()
+            serializer = GroupSerializer(groups, many=True)
+            return Response(serializer.data)
+        except Usuario.DoesNotExist:
+            return Response(
+                {"error": "Usuario no encontrado"}, status=status.HTTP_404_NOT_FOUND
+            )
+
+    def post(self, request, user_id):
+        try:
+            user = Usuario.objects.get(id=user_id)
+            group_ids = request.data.get("group_ids", [])
+
+            # Limpiar grupos actuales y asignar nuevos
+            user.groups.clear()
+            for group_id in group_ids:
+                try:
+                    group = Group.objects.get(id=group_id)
+                    user.groups.add(group)
+                except Group.DoesNotExist:
+                    continue
+
+            # Obtener grupos actualizados
+            groups = user.groups.all()
+            serializer = GroupSerializer(groups, many=True)
+            return Response(serializer.data)
+
+        except Usuario.DoesNotExist:
+            return Response(
+                {"error": "Usuario no encontrado"}, status=status.HTTP_404_NOT_FOUND
+            )
+
+
+class PermissionsListView(APIView):
+    """Listar todos los permisos disponibles"""
+
+    def get(self, request):
+        permissions = Permission.objects.all()
+        serializer = PermissionSerializer(permissions, many=True)
+        return Response(serializer.data)
+
+
+class GroupPermissionsView(APIView):
+    """Gestionar permisos de un grupo"""
+
+    def get(self, request, group_id):
+        try:
+            group = Group.objects.get(id=group_id)
+            permissions = group.permissions.all()
+            serializer = PermissionSerializer(permissions, many=True)
+            return Response(serializer.data)
+        except Group.DoesNotExist:
+            return Response(
+                {"error": "Grupo no encontrado"}, status=status.HTTP_404_NOT_FOUND
+            )
+
+    def post(self, request, group_id):
+        try:
+            group = Group.objects.get(id=group_id)
+            permission_ids = request.data.get("permission_ids", [])
+
+            # Limpiar permisos actuales y asignar nuevos
+            group.permissions.clear()
+            for perm_id in permission_ids:
+                try:
+                    permission = Permission.objects.get(id=perm_id)
+                    group.permissions.add(permission)
+                except Permission.DoesNotExist:
+                    continue
+
+            # Obtener permisos actualizados
+            permissions = group.permissions.all()
+            serializer = PermissionSerializer(permissions, many=True)
+            return Response(serializer.data)
+
+        except Group.DoesNotExist:
+            return Response(
+                {"error": "Grupo no encontrado"}, status=status.HTTP_404_NOT_FOUND
+            )
+
+
+class CreateGroupView(APIView):
+    """Crear un nuevo grupo (rol)"""
+
+    def post(self, request):
+        name = request.data.get("name")
+        if not name:
+            return Response(
+                {"error": "El nombre del grupo es requerido"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        group, created = Group.objects.get_or_create(name=name)
+        serializer = GroupSerializer(group)
+        return Response(
+            serializer.data,
+            status=status.HTTP_201_CREATED if created else status.HTTP_200_OK,
+        )
+
 
 """
 #####################################
@@ -158,6 +287,11 @@ class ValidateSessionView(APIView):
 
 
 class CasaView(APIView):
+    def get(self, request):
+        casas = Casa.objects.all()
+        serializer = CasaSerializer(casas, many=True)
+        return Response(serializer.data)
+
     def post(self, request):
         """Crear casa (solo admin y personal, puede hacerlo)"""
         token = request.COOKIES.get("jwt")
@@ -211,6 +345,11 @@ class AsignarCasaView(APIView):
 
 
 class MultaView(APIView):
+    def get(self, request):
+        multas = Multa.objects.all()
+        serializer = MultaSerializer(multas, many=True)
+        return Response(serializer.data)
+
     def post(self, request):
         """Crear multa (solo admin y personal, puede hacerlo)"""
         token = request.COOKIES.get("jwt")
@@ -241,6 +380,11 @@ class MultaView(APIView):
 
 
 class IngresoSalidaView(APIView):
+    def get(self, request):
+        ingreso_salida = IngresoSalida.objects.all()
+        serializer = IngresoSalidaSerializer(ingreso_salida, many=True)
+        return Response(serializer.data)
+
     def post(self, request):
         """Crear ingreso/salida a usuario (solo Administrador y Personal, puede hacerlo)"""
         token = request.COOKIES.get("jwt")
@@ -282,6 +426,13 @@ class IngresoSalidaView(APIView):
 
 
 class VehiculoView(APIView):
+    def get(self, request):
+        vehiculos = Vehiculo.objects.all()
+        serializer = VehiculoSerializer(vehiculos, many=True)
+        return Response(serializer.data)
+
+        pass
+
     def post(self, request):
         """Crear vehiculo (solo admin y personal, puede hacerlo)"""
         token = request.COOKIES.get("jwt")
@@ -312,6 +463,11 @@ class VehiculoView(APIView):
 
 
 class ReservaView(APIView):
+    def get(self, request):
+        reservas = Reserva.objects.all()
+        serializer = ReservaSerializer(reservas, many=True)
+        return Response(serializer.data)
+
     def post(self, request):
         """Asignar reserva a usuario (solo Admin y Personal, puede hacerlo)"""
         token = request.COOKIES.get("jwt")
@@ -373,6 +529,11 @@ class AreaComunView(APIView):
 
 
 class ExtranjeroView(APIView):
+    def get(self, request):
+        extranjeros = Extranjero.objects.all()
+        serializer = ExtranjeroSerializer(extranjeros, many=True)
+        return Response(serializer.data)
+
     def post(self, request):
         """Crear extranjero (solo admin y personal, puede hacerlo)"""
         token = request.COOKIES.get("jwt")

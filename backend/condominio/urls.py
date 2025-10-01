@@ -24,6 +24,12 @@ from .views import (
     # listar todo
     UsuariosAllView,
     ResidentesAllView,
+    # roles y permisos
+    GroupsListView,
+    UserGroupsView,
+    PermissionsListView,
+    GroupPermissionsView,
+    CreateGroupView,
 )
 
 
@@ -54,4 +60,16 @@ urlpatterns = [
     # listas sin permisos
     path("v1/usuarios/", UsuariosAllView.as_view(), name="usuarios"),
     path("v1/residentes/", ResidentesAllView.as_view(), name="residentes"),
+    # roles y permisos
+    path("v1/groups/", GroupsListView.as_view(), name="groups"),
+    path("v1/groups/create/", CreateGroupView.as_view(), name="create-group"),
+    path(
+        "v1/users/<int:user_id>/groups/", UserGroupsView.as_view(), name="user-groups"
+    ),
+    path("v1/permissions/", PermissionsListView.as_view(), name="permissions"),
+    path(
+        "v1/groups/<int:group_id>/permissions/",
+        GroupPermissionsView.as_view(),
+        name="group-permissions",
+    ),
 ]
