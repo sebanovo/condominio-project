@@ -417,4 +417,19 @@ export const server = () => ({
 
     return response.json();
   },
+  getCurrentUser: async () => {
+    const response = await fetch('/api/v1/user/', {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return response.json();
+  },
 });

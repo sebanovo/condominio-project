@@ -1,7 +1,6 @@
 import { SYSTEM_NAME } from '../constants/index';
 import NavBar from '../components/NavBar';
 import FeatureCard from '../components/FeatureCard';
-import PriceCard from '../components/PriceCard';
 import TestimonialCard from '../components/TestimonialCard';
 
 function LandingPage() {
